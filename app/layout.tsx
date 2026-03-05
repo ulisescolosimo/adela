@@ -20,14 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${poppins.variable}`}>
+    <html lang="es" className={`${poppins.variable}`} suppressHydrationWarning>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Swanky+and+Moo+Moo&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="font-poppins antialiased bg-white min-h-screen">
+      <body className="font-poppins antialiased bg-white min-h-screen" suppressHydrationWarning>
         {children}
         <WhatsAppFloat />
       </body>

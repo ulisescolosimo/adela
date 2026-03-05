@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Header, Hero } from "@/components/Header";
 import { InstagramFeed } from "@/components/InstagramFeed";
+import { AnimatedSection, AnimatedStagger, AnimatedItem } from "@/components/AnimatedSection";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -18,7 +22,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 md:items-stretch gap-8 md:gap-12 px-6 py-12 md:px-[181px] md:py-16">
             {/* Columna izquierda: misma altura que la imagen (grid la iguala) */}
-            <div className="flex flex-col min-h-0">
+            <AnimatedSection className="flex flex-col min-h-0" direction="right" delay={0.1}>
               <h2 className="text-red-400 text-5xl md:text-6xl font-light font-poppins uppercase tracking-[2.87px] leading-tight mb-4 md:mb-6">
                 Sobre mí
               </h2>
@@ -31,17 +35,17 @@ export default function Home() {
               >
                 Leer más
               </Link>
-            </div>
+            </AnimatedSection>
 
             {/* Columna derecha: imagen define la altura de la fila */}
-            <div className="relative w-full min-h-0 aspect-[631/423]">
+            <AnimatedSection className="relative w-full min-h-0 aspect-[631/423]" direction="left" delay={0.15}>
               <Image
                 src="/images/sobre-mi/Adela Saenz Cavia62Gaudi 1.png"
                 alt="Adela - Sobre mí"
                 fill
                 className="object-cover"
               />
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -50,7 +54,7 @@ export default function Home() {
       <section className="relative py-24 bg-white">
         <div className="max-w-[1474px] mx-auto px-6">
           {/* Imagen decorativa + título centrados */}
-          <div className="flex flex-col items-center text-center mb-12">
+          <AnimatedSection className="flex flex-col items-center text-center mb-12" delay={0.1}>
             <Image
               src="/images/trabajando/07 2 (1).png"
               alt=""
@@ -61,11 +65,13 @@ export default function Home() {
             <h2 className="text-stone-900 text-4xl font-light font-poppins uppercase tracking-widest">
               ¿en qué estoy trabajando?
             </h2>
-          </div>
+          </AnimatedSection>
 
           {/* Contenedor más angosto para cada fila */}
           <div className="max-w-[900px] mx-auto space-y-8">
-            <div className="flex flex-col md:flex-row gap-6 items-start border-b border-[#A9B8C3] pb-8">
+            <AnimatedStagger staggerChildren={0.15} className="space-y-8">
+              <AnimatedItem>
+                <div className="flex flex-col md:flex-row gap-6 items-start border-b border-[#A9B8C3] pb-8">
               <div className="relative flex-shrink-0">
                 <Image src="/images/trabajando/07 1.png" alt="Experiencias de aprendizaje" width={95} height={95} className="object-contain" />
               </div>
@@ -81,6 +87,8 @@ export default function Home() {
                 <Image src="/images/trabajando/BOTON EXPERIENCIAS.png" alt="" width={31} height={31} className="object-contain" />
               </div>
             </div>
+              </AnimatedItem>
+              <AnimatedItem>
             <div className="flex flex-col md:flex-row gap-6 items-start border-b border-[#A9B8C3] pb-8">
               <div className="relative flex-shrink-0">
                 <Image src="/images/trabajando/11 1.png" alt="Procesos de cambio cultural" width={98} height={98} className="object-contain" />
@@ -97,6 +105,8 @@ export default function Home() {
                 <Image src="/images/trabajando/BOTON ASESOR Y FACILIT.png" alt="" width={31} height={31} className="object-contain" />
               </div>
             </div>
+              </AnimatedItem>
+              <AnimatedItem>
             <div className="flex flex-col md:flex-row gap-6 items-start">
               <div className="relative flex-shrink-0">
                 <Image src="/images/trabajando/15 1.png" alt="Coaching y Mentoreo" width={85} height={85} className="object-contain" />
@@ -113,13 +123,15 @@ export default function Home() {
                 <Image src="/images/trabajando/BOTON COACHING Y MENTOREO.png" alt="" width={31} height={31} className="object-contain" />
               </div>
             </div>
+              </AnimatedItem>
+            </AnimatedStagger>
           </div>
         </div>
       </section>
 
       {/* We Human Lab */}
       <section id="we-human-lab" className="relative overflow-hidden bg-[#E6CC76]/25">
-        <div className="relative max-w-[1474px] mx-auto px-6 py-12 md:py-16 lg:py-24 text-center">
+        <AnimatedSection className="relative max-w-[1474px] mx-auto px-6 py-12 md:py-16 lg:py-24 text-center" delay={0.1}>
           <div className="w-20 h-20 sm:w-24 sm:h-24 relative mx-auto mb-6 md:mb-8">
             <Image
               src="/images/We Human 1.png"
@@ -146,27 +158,29 @@ export default function Home() {
           >
             Leer más
           </Link>
-        </div>
+        </AnimatedSection>
       </section>
 
       {/* Red Communia */}
       <section id="red-communia" className="relative overflow-hidden bg-white">
         <div className="max-w-6xl mx-auto px-6 py-12 md:py-16 lg:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 lg:items-start gap-8 lg:gap-12 mb-8 lg:mb-12">
-            <div className="order-2 lg:order-1">
+            <AnimatedSection className="order-2 lg:order-1" direction="right" delay={0.1}>
               <h2 className="text-yellow-600 text-3xl sm:text-4xl font-light font-poppins uppercase tracking-widest leading-tight mb-2">
                 RED COMMUNIA
               </h2>
               <p className="text-stone-700 text-xl sm:text-2xl font-swanky font-normal leading-tight">
                 Mi red de trabajo
               </p>
-            </div>
-            <p className="text-black text-sm font-light font-poppins leading-7 max-w-[604px] order-1 lg:order-2 lg:max-w-none">
-              Muchos de los proyectos que desarrollamos e implementamos requieren de un gran equipo. Para ello, armé RedCommunia, una red colaborativa de trabajo conformada por psicólogos, pedagogos, sociólogos, counselors y coaches cuya filosofía es la iteración, exploración e integración de ideas, conocimientos y abordajes.
-            </p>
+            </AnimatedSection>
+            <AnimatedSection className="order-1 lg:order-2 lg:max-w-none" direction="left" delay={0.15}>
+              <p className="text-black text-sm font-light font-poppins leading-7 max-w-[604px] lg:max-w-none">
+                Muchos de los proyectos que desarrollamos e implementamos requieren de un gran equipo. Para ello, armé RedCommunia, una red colaborativa de trabajo conformada por psicólogos, pedagogos, sociólogos, counselors y coaches cuya filosofía es la iteración, exploración e integración de ideas, conocimientos y abordajes.
+              </p>
+            </AnimatedSection>
           </div>
 
-          <div className="relative overflow-hidden -mx-6 px-6 py-8 md:py-10">
+          <AnimatedSection className="relative overflow-hidden -mx-6 px-6 py-8 md:py-10" delay={0.2}>
             <div className="absolute inset-0 -z-10">
               <Image src="/images/trabajando/Vector 39.png" alt="" fill className="object-cover" />
             </div>
@@ -181,7 +195,14 @@ export default function Home() {
               "Lucía Franchi",
               "Fabiana García Lago",
             ].map((name, i) => (
-              <div key={name} className="flex flex-col items-center flex-shrink-0">
+              <motion.div
+                key={name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="flex flex-col items-center flex-shrink-0"
+              >
                 <div className={`relative w-24 h-24 sm:w-32 sm:h-32 rounded-full border border-stone-400 overflow-hidden ${i === 6 ? "bg-zinc-300" : "bg-stone-100"}`}>
                   <Image
                     src="https://placehold.co/133x128"
@@ -195,10 +216,10 @@ export default function Home() {
                 <span className={`mt-2 text-base sm:text-xl font-swanky font-normal capitalize leading-tight text-center ${i === 1 ? "text-yellow-600" : "text-black"}`}>
                   {name}
                 </span>
-              </div>
+              </motion.div>
             ))}
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -206,7 +227,7 @@ export default function Home() {
       <section className="relative overflow-hidden bg-white py-8 sm:py-12 lg:py-0">
         <div className="mx-auto flex flex-col lg:flex-row">
           {/* Imagen del libro */}
-          <div className="w-full aspect-[490/583] lg:w-[380px] xl:w-[490px] lg:flex-shrink-0 lg:aspect-[490/583] relative">
+          <AnimatedSection className="w-full aspect-[490/583] lg:w-[380px] xl:w-[490px] lg:flex-shrink-0 lg:aspect-[490/583] relative" direction="right" delay={0.1}>
             <Image
               src="/images/Adela Saenz Cavia137 2.png"
               alt="Libro ¿Qué te apasiona?"
@@ -215,9 +236,9 @@ export default function Home() {
               className="w-full h-full object-cover object-top shadow-[0px_0px_23.5px_1px_rgba(0,0,0,0.05)]"
               unoptimized
             />
-          </div>
+          </AnimatedSection>
           {/* Zona de contenido con fondo rosa - texto centrado verticalmente */}
-          <div className="relative flex-1 flex flex-col lg:flex-row lg:items-center lg:justify-center min-h-0 px-4 sm:px-6 lg:px-8 xl:px-12 xl:pl-[min(6rem,97px)] py-8 sm:py-10 lg:py-12">
+          <AnimatedSection className="relative flex-1 flex flex-col lg:flex-row lg:items-center lg:justify-center min-h-0 px-4 sm:px-6 lg:px-8 xl:px-12 xl:pl-[min(6rem,97px)] py-8 sm:py-10 lg:py-12" direction="left" delay={0.15}>
             <div className="absolute inset-0 bg-rose-100/70 opacity-30 shadow-[0px_4px_5.1px_0px_rgba(0,0,0,0.25)] pointer-events-none" aria-hidden />
             <div className="relative z-10 flex flex-wrap items-center justify-center lg:justify-center gap-6 lg:gap-8 w-full">
               <div className="flex flex-col justify-center w-full min-w-0 max-w-[480px]">
@@ -261,7 +282,7 @@ export default function Home() {
                 />
               </div>
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -269,8 +290,8 @@ export default function Home() {
       <section className="relative py-24 bg-white overflow-hidden">
         <div className="max-w-[1474px] mx-auto relative px-6 md:px-[123px]">
           <div className="grid grid-cols-1 md:grid-cols-2 md:gap-[152px] items-start">
-            {/* Columna izquierda: título, ilustración, párrafo, botón */}
-            <div className="flex flex-col max-w-[478px]">
+            {/* Columna izquierda */}
+            <AnimatedSection className="flex flex-col max-w-[478px]" direction="right" delay={0.1}>
               <h2 className="text-stone-900 text-4xl font-light font-poppins uppercase leading-[52px] tracking-widest max-w-[656px] mb-8">
                 MI TRABAJO CON LÍDERES SOCIALES
               </h2>
@@ -286,9 +307,9 @@ export default function Home() {
               >
                 Leer más
               </Link>
-            </div>
-            {/* Columna derecha: imagen (sobresale por arriba como en el diseño) */}
-            <div className="relative w-full mt-8 md:mt-0 md:-mt-4 order-first md:order-none md:max-w-[720px]">
+            </AnimatedSection>
+            {/* Columna derecha: imagen */}
+            <AnimatedSection className="relative w-full mt-8 md:mt-0 md:-mt-4 order-first md:order-none md:max-w-[720px]" direction="left" delay={0.15}>
               <div className="relative w-full aspect-[720/783] max-w-[720px] ml-0 md:ml-auto">
                 <Image
                   src="/images/Adela Saenz Cavia9 1.png"
@@ -299,7 +320,7 @@ export default function Home() {
                   unoptimized
                 />
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -309,7 +330,7 @@ export default function Home() {
         <div className="max-w-[1474px] mx-auto px-6 relative">
           <div className="absolute inset-0 opacity-30 bg-white pointer-events-none -z-10" aria-hidden />
           {/* Header: icono, título y enlaces */}
-          <div className="flex flex-col items-center text-center mb-10 md:mb-12">
+          <AnimatedSection className="flex flex-col items-center text-center mb-10 md:mb-12" delay={0.1}>
             <div className="w-16 h-16 md:w-20 md:h-20 relative mb-4">
               <Image
                 src="/images/galeria/15 1 (1).png"
@@ -339,36 +360,28 @@ export default function Home() {
                 LINKTREE
               </Link>
             </div>
-          </div>
+          </AnimatedSection>
 
-          {/* Galería: masonry con CSS columns (ancho limitado para evitar pixelado) */}
-          <div className="relative w-full max-w-[900px] mx-auto columns-2 md:columns-3 gap-4 space-y-4">
-            <div className="break-inside-avoid mb-4">
-              <div className="relative w-full aspect-[256/384] overflow-hidden">
-                <Image src="/images/galeria/1.png" alt="Publicación 1" fill className="object-cover" sizes="(max-width: 768px) 45vw, 280px" />
-              </div>
-            </div>
-            <div className="break-inside-avoid mb-4">
-              <div className="relative w-full aspect-[288/384] overflow-hidden">
-                <Image src="/images/galeria/2.png" alt="Publicación 2" fill className="object-cover" sizes="(max-width: 768px) 45vw, 280px" />
-              </div>
-            </div>
-            <div className="break-inside-avoid mb-4">
-              <div className="relative w-full aspect-[456/288] overflow-hidden">
-                <Image src="/images/galeria/3.png" alt="Publicación 3" fill className="object-cover" sizes="(max-width: 768px) 90vw, 280px" />
-              </div>
-            </div>
-            <div className="break-inside-avoid mb-4">
-              <div className="relative w-full aspect-[384/288] overflow-hidden">
-                <Image src="/images/galeria/4.png" alt="Publicación 4" fill className="object-cover" sizes="(max-width: 768px) 45vw, 280px" />
-              </div>
-            </div>
-            <div className="break-inside-avoid mb-4">
-              <div className="relative w-full aspect-[224/288] overflow-hidden">
-                <Image src="/images/galeria/5.png" alt="Publicación 5" fill className="object-cover" sizes="(max-width: 768px) 45vw, 280px" />
-              </div>
-            </div>
-          </div>
+          {/* Galería: masonry con animación stagger */}
+          <AnimatedStagger staggerChildren={0.1} delayChildren={0.15} className="relative w-full max-w-[900px] mx-auto columns-2 md:columns-3 gap-4 space-y-4">
+            {[
+              { src: "/images/galeria/1.png", alt: "Publicación 1", aspect: "aspect-[256/384]" },
+              { src: "/images/galeria/2.png", alt: "Publicación 2", aspect: "aspect-[288/384]" },
+              { src: "/images/galeria/3.png", alt: "Publicación 3", aspect: "aspect-[456/288]" },
+              { src: "/images/galeria/4.png", alt: "Publicación 4", aspect: "aspect-[384/288]" },
+              { src: "/images/galeria/5.png", alt: "Publicación 5", aspect: "aspect-[224/288]" },
+            ].map((item, i) => (
+              <AnimatedItem key={i} className="break-inside-avoid mb-4">
+                <motion.div
+                  className={`relative w-full ${item.aspect} overflow-hidden`}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Image src={item.src} alt={item.alt} fill className="object-cover" sizes="(max-width: 768px) 45vw, 280px" />
+                </motion.div>
+              </AnimatedItem>
+            ))}
+          </AnimatedStagger>
         </div>
       </section>
 
@@ -377,8 +390,8 @@ export default function Home() {
         <div className="absolute inset-0 opacity-30 bg-orange-300/25 pointer-events-none" aria-hidden />
         <div className="relative max-w-[1474px] mx-auto px-6 py-12 md:py-16 lg:px-[114px] lg:pt-[132px] lg:pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12 xl:gap-[188px] items-start">
-            {/* Columna izquierda: título, icono, texto, botón */}
-            <div className="flex flex-col min-w-0">
+            {/* Columna izquierda */}
+            <AnimatedSection className="flex flex-col min-w-0" direction="right" delay={0.1}>
               <h2 className="text-yellow-600 text-3xl sm:text-4xl font-light font-poppins uppercase leading-[52px] tracking-widest max-w-[800px] mb-6">
                 Aprendizaje socioemocional (ASE / SEL)
               </h2>
@@ -404,10 +417,10 @@ export default function Home() {
               >
                 Leer más
               </Link>
-            </div>
+            </AnimatedSection>
 
             {/* Columna derecha: imagen con overlay y botón play */}
-            <div className="relative w-full max-w-[507px] aspect-[507/526] mx-auto lg:mx-0 lg:ml-auto">
+            <AnimatedSection className="relative w-full max-w-[507px] aspect-[507/526] mx-auto lg:mx-0 lg:ml-auto" direction="left" delay={0.15}>
               <Image
                 src="/images/Captura de Pantalla 2026-02-25 a la(s) 11.09.04 1.png"
                 alt="Aprendizaje socioemocional"
@@ -425,7 +438,7 @@ export default function Home() {
                   className="object-contain w-[72px] h-[73px]"
                 />
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -434,7 +447,7 @@ export default function Home() {
       <section className="relative w-full min-h-[496px] bg-white overflow-hidden">
         <div className="absolute inset-0 opacity-30 bg-red-400 pointer-events-none -z-10" aria-hidden />
         <div className="relative max-w-[1474px] mx-auto px-6 py-12 md:py-16">
-          <div className="flex flex-col items-center">
+          <AnimatedSection className="flex flex-col items-center" delay={0.1}>
             <a
               href="https://instagram.com/Adela.Cavia"
               target="_blank"
@@ -459,17 +472,16 @@ export default function Home() {
             >
               VER EN MI INSTAGRAM
             </a>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Contacto - Form section */}
       <section id="contacto" className="relative w-full bg-white overflow-hidden">
         <div className="w-full">
-          {/* Contenido principal: imagen izquierda + form derecha */}
           <div className="grid grid-cols-1 lg:grid-cols-2 min-h-0">
-            {/* Imagen izquierda - menos alto, cover */}
-            <div className="relative w-full h-full min-h-[750px]">
+            {/* Imagen izquierda */}
+            <AnimatedSection className="relative w-full h-full min-h-[750px]" direction="right" delay={0.05}>
               <Image
                 src="/images/Gastro-Session-4-28 1.png"
                 alt="Contacto"
@@ -477,9 +489,9 @@ export default function Home() {
                 className="object-cover"
                 sizes="100vw"
               />
-            </div>
+            </AnimatedSection>
             {/* Columna derecha: título + form */}
-            <div className="flex flex-col items-center justify-center px-6 md:px-12 lg:px-16 py-12 lg:py-16">
+            <AnimatedSection className="flex flex-col items-center justify-center px-6 md:px-12 lg:px-16 py-12 lg:py-16" direction="left" delay={0.15}>
               <div className="flex items-start gap-4 mb-8">
                 <h2 className="text-red-400 text-3xl font-normal font-swanky leading-[96px] tracking-wider">
                   ¡Enviame un mensaje!
@@ -493,24 +505,36 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <form className="space-y-4 w-full max-w-[462px]">
+              <form className="space-y-4 w-full max-w-[462px]" onSubmit={(e) => e.preventDefault()}>
                 <div>
-                  <label className="block text-black/70 text-base font-light font-poppins leading-7">Nombre y Apellido</label>
-                  <svg className="w-full h-px mt-1" viewBox="0 0 462 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0.25H462" stroke="#C58770" strokeWidth="0.5" />
-                  </svg>
+                  <label htmlFor="nombre" className="block text-black/70 text-base font-light font-poppins leading-7">Nombre y Apellido</label>
+                  <input
+                    id="nombre"
+                    type="text"
+                    name="nombre"
+                    placeholder=" "
+                    className="w-full mt-1 py-2 bg-transparent border-0 border-b border-[#C58770]/50 focus:border-[#C58770] focus:outline-none text-black text-base font-light font-poppins leading-7 placeholder:text-black/40"
+                  />
                 </div>
                 <div>
-                  <label className="block text-black/70 text-base font-light font-poppins leading-7">E-mail</label>
-                  <svg className="w-full h-px mt-1" viewBox="0 0 462 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0.25H462" stroke="#C58770" strokeWidth="0.5" />
-                  </svg>
+                  <label htmlFor="email" className="block text-black/70 text-base font-light font-poppins leading-7">E-mail</label>
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder=" "
+                    className="w-full mt-1 py-2 bg-transparent border-0 border-b border-[#C58770]/50 focus:border-[#C58770] focus:outline-none text-black text-base font-light font-poppins leading-7 placeholder:text-black/40"
+                  />
                 </div>
                 <div>
-                  <label className="block text-black/70 text-base font-light font-poppins leading-7">Mensaje</label>
-                  <svg className="w-full h-px mt-1" viewBox="0 0 462 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0.25H462" stroke="#C58770" strokeWidth="0.5" />
-                  </svg>
+                  <label htmlFor="mensaje" className="block text-black/70 text-base font-light font-poppins leading-7">Mensaje</label>
+                  <textarea
+                    id="mensaje"
+                    name="mensaje"
+                    placeholder=" "
+                    rows={4}
+                    className="w-full mt-1 py-2 bg-transparent border-0 border-b border-[#C58770]/50 focus:border-[#C58770] focus:outline-none text-black text-base font-light font-poppins leading-7 placeholder:text-black/40 resize-y min-h-[100px]"
+                  />
                 </div>
                 <button
                   type="submit"
@@ -519,19 +543,25 @@ export default function Home() {
                   enviar
                 </button>
               </form>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="w-full h-28 bg-[#C58770] flex flex-wrap items-center justify-center gap-8 md:gap-16 py-6 px-6">
+      <motion.footer
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5 }}
+        className="w-full h-28 bg-[#C58770] flex flex-wrap items-center justify-center gap-8 md:gap-16 py-6 px-6"
+      >
         <a href="https://linkedin.com" className="text-orange-100 text-lg font-poppins hover:text-white transition">Usuario Linkedin</a>
         <a href="https://instagram.com" className="text-orange-100 text-lg font-poppins hover:text-white transition">@cuenta instagram</a>
         <a href="https://x.com" className="text-orange-100 text-lg font-poppins hover:text-white transition">@cuenta X</a>
         <a href="https://facebook.com" className="text-orange-100 text-lg font-poppins hover:text-white transition">cuenta facebook</a>
         <a href="mailto:contacto@example.com" className="text-orange-100 text-lg font-poppins hover:text-white transition">@mail</a>
-      </footer>
+      </motion.footer>
     </div>
   );
 }

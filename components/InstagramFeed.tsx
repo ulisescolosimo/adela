@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 type InstagramPost = {
   id: string;
@@ -59,12 +60,17 @@ export function InstagramFeed() {
   return (
     <>
       {itemsToShow.map((post, i) => (
-        <a
+        <motion.a
           key={post.id}
           href={post.permalink}
           target="_blank"
           rel="noopener noreferrer"
-          className={`relative block overflow-hidden ${SIZES[i]} flex-shrink-0 hover:opacity-90 transition`}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.45, delay: i * 0.1 }}
+          whileHover={{ scale: 1.03 }}
+          className={`relative block overflow-hidden ${SIZES[i]} flex-shrink-0 hover:opacity-90 transition shadow-md`}
         >
           <Image
             src={post.media_url}
@@ -75,7 +81,7 @@ export function InstagramFeed() {
             unoptimized
             sizes="(max-width: 768px) 33vw, 208px"
           />
-        </a>
+        </motion.a>
       ))}
     </>
   );

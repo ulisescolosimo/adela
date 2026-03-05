@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 function IconInstagram() {
   return (
@@ -14,16 +15,46 @@ function IconInstagram() {
 }
 
 export function Header() {
+  const navItems = [
+    { href: "#sobre-mi", label: "Sobre mí" },
+    { href: "#we-human-lab", label: "We Human Lab" },
+    { href: "#contacto", label: "Contacto" },
+    { href: "/", label: "¿Qué te apasiona?", accent: true },
+  ];
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#F9F1EF]/95 backdrop-blur">
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed top-0 left-0 right-0 z-50 bg-[#F9F1EF]/95 backdrop-blur"
+    >
       <nav className="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-8">
-          <Link href="#sobre-mi" className="text-stone-900 text-sm font-medium font-poppins leading-9 hover:text-[#D49A89] transition">Sobre mí</Link>
-          <Link href="#we-human-lab" className="text-stone-900 text-sm font-medium font-poppins leading-9 hover:text-[#D49A89] transition">We Human Lab</Link>
-          <Link href="#contacto" className="text-stone-900 text-sm font-medium font-poppins leading-9 hover:text-[#D49A89] transition">Contacto</Link>
-          <Link href="/" className="text-[#D49A89] text-sm font-medium font-poppins leading-9">¿Qué te apasiona?</Link>
+          {navItems.map((item, i) => (
+            <motion.div
+              key={item.href}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * i + 0.2, duration: 0.4 }}
+            >
+              <Link
+                href={item.href}
+                className={`text-sm font-medium font-poppins leading-9 transition ${
+                  item.accent ? "text-[#D49A89]" : "text-stone-900 hover:text-[#D49A89]"
+                }`}
+              >
+                {item.label}
+              </Link>
+            </motion.div>
+          ))}
         </div>
-        <div className="flex items-center gap-6">
+        <motion.div
+          className="flex items-center gap-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.4 }}
+        >
           <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-stone-950 hover:opacity-80" aria-label="LinkedIn">
             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_126_78)">
@@ -51,38 +82,57 @@ export function Header() {
               <path d="M5.64363 2.30816C6.32272 2.30816 7.47422 2.3166 7.47422 2.3166V0.00937324C7.47422 0.00937324 6.67281 -0.0117166 5.62676 0.00937324C4.57649 0.030463 1.99931 0.110604 1.99931 3.14753V5.10467H0V7.50469H1.99931V15H4.85909V7.50469H7.19584L7.47422 5.10467H4.85487V3.14753C4.85487 3.14753 4.96454 2.30816 5.64363 2.30816Z" fill="black"/>
             </svg>
           </a>
-        </div>
+        </motion.div>
       </nav>
-    </header>
+    </motion.header>
   );
 }
 
 export function Hero() {
-  const accent = "#D49A89"; // mismo tono que la referencia (red-400 ~ #C58770)
+  const accent = "#D49A89";
+  const ease = [0.22, 1, 0.36, 1] as const;
   return (
     <div
       data-layer="banner home"
       className="w-full overflow-hidden bg-[#F9F1EF]"
     >
       <div className="relative w-[1474px] min-h-[746px] h-[746px] mx-auto bg-[#F9F1EF]">
-        {/* Adela + Sáenz (bloque nombre superior) */}
-        <div
+        {/* Adela */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2, ease }}
           className="absolute left-[285px] top-[293px] font-poppins font-light text-black text-8xl uppercase leading-[104.35px] tracking-[5.52px]"
           style={{ width: "1265.96px" }}
         >
           Adela
-        </div>
+        </motion.div>
         {/* Cavia */}
-        <div className="absolute left-[260px] top-[398px] font-poppins font-light text-black text-8xl uppercase leading-[104.35px] tracking-[5.52px]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.35, ease }}
+          className="absolute left-[260px] top-[398px] font-poppins font-light text-black text-8xl uppercase leading-[104.35px] tracking-[5.52px]"
+        >
           Cavia
-        </div>
-        {/* Sáenz (derecha, pegado a la imagen) */}
-        <div className="absolute right-[350px] top-[293px] text-right font-poppins font-light text-black text-8xl uppercase leading-[104.35px] tracking-[5.52px]">
+        </motion.div>
+        {/* Sáenz */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2, ease }}
+          className="absolute right-[350px] top-[293px] text-right font-poppins font-light text-black text-8xl uppercase leading-[104.35px] tracking-[5.52px]"
+        >
           Sáenz
-        </div>
+        </motion.div>
 
         {/* Imagen central */}
-        <div className="absolute left-[512.66px] top-[157px] w-96 h-[589px]">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.1, ease }}
+          className="absolute left-[512.66px] top-[157px] w-96 h-[589px]"
+        >
           <Image
             src="/images/hero/Adela Saenz Cavia25 2.png"
             alt="Adela Sáenz"
@@ -90,55 +140,65 @@ export function Hero() {
             className="object-cover object-top"
             unoptimized
           />
-        </div>
+        </motion.div>
 
-        {/* Frases — Swanky, color acento */}
-        <p
-          className="absolute left-[123px] top-[203px] w-56 text-center font-swanky text-xl font-normal leading-5 text-[#D49A89]"
-          style={{ maxWidth: "14rem" }}
-        >
-          Buscando siempre lo que une por sobre lo que separa.
-        </p>
-        <p
-          className="absolute left-[976px] top-[179px] w-56 text-center font-swanky text-xl font-normal leading-5 text-[#D49A89]"
-          style={{ maxWidth: "14rem" }}
-        >
-          Curiosa por naturaleza en un mundo con tanto por descubrir.
-        </p>
-        <p
-          className="absolute left-[175px] top-[569px] w-56 text-center font-swanky text-xl font-normal leading-5 text-[#D49A89]"
-          style={{ maxWidth: "14rem" }}
-        >
-          Convencida de que todos podemos cambiar si nos los proponemos.
-        </p>
-        <p
-          className="absolute left-[1004px] top-[483px] w-56 text-center font-swanky text-xl font-normal leading-5 text-[#D49A89]"
-          style={{ maxWidth: "14rem" }}
-        >
-          Apasionada del conocimiento y de entender lo que mueve a las personas.
-        </p>
+        {/* Frases — Swanky */}
+        {[
+          { left: 123, top: 203, text: "Buscando siempre lo que une por sobre lo que separa.", delay: 0.5 },
+          { left: 976, top: 179, text: "Curiosa por naturaleza en un mundo con tanto por descubrir.", delay: 0.45 },
+          { left: 175, top: 569, text: "Convencida de que todos podemos cambiar si nos los proponemos.", delay: 0.6 },
+          { left: 1004, top: 483, text: "Apasionada del conocimiento y de entender lo que mueve a las personas.", delay: 0.55 },
+        ].map((item, i) => (
+          <motion.p
+            key={i}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: item.delay, ease }}
+            className="absolute w-56 text-center font-swanky text-xl font-normal leading-5 text-[#D49A89]"
+            style={{ left: item.left, top: item.top, maxWidth: "14rem" }}
+          >
+            {item.text}
+          </motion.p>
+        ))}
 
-        {/* Flechas decorativas (SVG inline, stroke acento) */}
-        <div className="absolute left-[427px] top-[540px]" aria-hidden>
-          <svg width={30} height={43} viewBox="0 0 30 43" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M27.6276 0.119354C34.9782 30.0216 12.3139 40.6119 0.0629883 42.1694" stroke={accent} />
-          </svg>
-        </div>
-        <div className="absolute left-[910px] top-[183px]" aria-hidden>
-          <svg width={42} height={31} viewBox="0 0 42 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.495323 30.5512C4.66641 0.0426231 29.6375 -1.46266 41.6017 1.59828" stroke={accent} />
-          </svg>
-        </div>
-        <div className="absolute left-[344px] top-[226px]" aria-hidden>
-          <svg width={47} height={27} viewBox="0 0 47 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M46.4557 24.1846C25.1998 5.77418 9.21546 13.8137 4.85643 16.3072C0.497396 18.8007 -1.98066 23.9697 4.24757 25.8734C10.4758 27.7772 26.5919 12.4487 7.13713 0.425317" stroke={accent} />
-          </svg>
-        </div>
-        <div className="absolute left-[948px] top-[425px]" aria-hidden>
-          <svg width={47} height={27} viewBox="0 0 47 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.296461 5.6091C22.9431 22.279 38.2408 12.9993 42.3888 10.1686C46.5367 7.33782 48.5978 1.98884 42.2384 0.584138C35.879 -0.82056 21.027 15.7356 41.3725 26.1811" stroke={accent} />
-          </svg>
-        </div>
+        {/* Flechas decorativas */}
+        {[
+          { left: 427, top: 540, delay: 0.7 },
+          { left: 910, top: 183, delay: 0.65 },
+          { left: 344, top: 226, delay: 0.72 },
+          { left: 948, top: 425, delay: 0.68 },
+        ].map((pos, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, pathLength: 0 }}
+            animate={{ opacity: 1, pathLength: 1 }}
+            transition={{ duration: 0.8, delay: pos.delay, ease }}
+            className="absolute"
+            style={{ left: pos.left, top: pos.top }}
+            aria-hidden
+          >
+            {i === 0 && (
+              <svg width={30} height={43} viewBox="0 0 30 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27.6276 0.119354C34.9782 30.0216 12.3139 40.6119 0.0629883 42.1694" stroke={accent} />
+              </svg>
+            )}
+            {i === 1 && (
+              <svg width={42} height={31} viewBox="0 0 42 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.495323 30.5512C4.66641 0.0426231 29.6375 -1.46266 41.6017 1.59828" stroke={accent} />
+              </svg>
+            )}
+            {i === 2 && (
+              <svg width={47} height={27} viewBox="0 0 47 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M46.4557 24.1846C25.1998 5.77418 9.21546 13.8137 4.85643 16.3072C0.497396 18.8007 -1.98066 23.9697 4.24757 25.8734C10.4758 27.7772 26.5919 12.4487 7.13713 0.425317" stroke={accent} />
+              </svg>
+            )}
+            {i === 3 && (
+              <svg width={47} height={27} viewBox="0 0 47 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.296461 5.6091C22.9431 22.279 38.2408 12.9993 42.3888 10.1686C46.5367 7.33782 48.5978 1.98884 42.2384 0.584138C35.879 -0.82056 21.027 15.7356 41.3725 26.1811" stroke={accent} />
+              </svg>
+            )}
+          </motion.div>
+        ))}
       </div>
     </div>
   );
