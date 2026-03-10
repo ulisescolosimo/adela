@@ -17,9 +17,11 @@ function IconInstagram() {
 export function Header() {
   const navItems = [
     { href: "#sobre-mi", label: "Sobre mí" },
+    { href: "#trabajando", label: "¿En qué estoy trabajando?" },
     { href: "#we-human-lab", label: "We Human Lab" },
+    { href: "#red-communia", label: "Red Communia" },
+    { href: "#libro", label: "¿Qué te apasiona?", accent: true },
     { href: "#contacto", label: "Contacto" },
-    { href: "/", label: "¿Qué te apasiona?", accent: true },
   ];
 
   return (
@@ -55,7 +57,7 @@ export function Header() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.4 }}
         >
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-stone-950 hover:opacity-80" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/adelacavia" target="_blank" rel="noopener noreferrer" className="text-stone-950 hover:opacity-80" aria-label="LinkedIn">
             <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_126_78)">
                 <path d="M7.93753 6.06776C8.13568 5.84347 8.30045 5.61525 8.50445 5.42243C9.13422 4.82825 9.87774 4.52919 10.7448 4.53509C11.2216 4.53902 11.6944 4.57444 12.1534 4.70626C13.205 5.01122 13.8171 5.73723 14.1094 6.76819C14.3271 7.54145 14.3684 8.33431 14.3703 9.13119C14.3723 10.8114 14.3664 12.4917 14.3703 14.17C14.3703 14.3273 14.3271 14.3687 14.1721 14.3667C13.309 14.3588 12.4458 14.3588 11.5825 14.3667C11.4315 14.3667 11.3982 14.3214 11.3982 14.1778C11.4021 12.5802 11.404 10.9806 11.3982 9.38303C11.3982 8.98162 11.3707 8.58223 11.2589 8.19267C11.0529 7.47454 10.5408 7.11056 9.7914 7.14988C8.76738 7.205 8.23572 7.71258 8.10622 8.75537C8.07483 9.00525 8.06112 9.25317 8.06112 9.505C8.06112 11.0593 8.06112 12.6137 8.06504 14.168C8.06504 14.3234 8.02773 14.3687 7.86883 14.3667C6.99979 14.3588 6.13069 14.3608 5.2616 14.3667C5.12231 14.3667 5.08111 14.3293 5.08307 14.1896C5.087 11.1125 5.087 8.03333 5.08307 4.95613C5.08307 4.80464 5.13212 4.76922 5.27533 4.76922C6.10123 4.77513 6.92523 4.77513 7.75115 4.76922C7.90221 4.76922 7.94145 4.81644 7.93946 4.96204C7.93162 5.32996 7.93753 5.69788 7.93753 6.06581V6.06776Z" fill="#1F191A"/>
@@ -69,17 +71,23 @@ export function Header() {
               </defs>
             </svg>
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-stone-950 hover:opacity-80" aria-label="Instagram">
+          <a href="https://instagram.com/adela.cavia" target="_blank" rel="noopener noreferrer" className="text-stone-950 hover:opacity-80" aria-label="Instagram">
             <IconInstagram />
           </a>
-          <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-stone-950 hover:opacity-80" aria-label="X (Twitter)">
+          <a href="https://x.com/Adel1ta" target="_blank" rel="noopener noreferrer" className="text-stone-950 hover:opacity-80" aria-label="X (Twitter)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
             </svg>
           </a>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-stone-950 hover:opacity-80" aria-label="Facebook">
+          <a href="https://www.facebook.com/adela.cavia/" target="_blank" rel="noopener noreferrer" className="text-stone-950 hover:opacity-80" aria-label="Facebook">
             <svg width="8" height="15" viewBox="0 0 8 15" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5.64363 2.30816C6.32272 2.30816 7.47422 2.3166 7.47422 2.3166V0.00937324C7.47422 0.00937324 6.67281 -0.0117166 5.62676 0.00937324C4.57649 0.030463 1.99931 0.110604 1.99931 3.14753V5.10467H0V7.50469H1.99931V15H4.85909V7.50469H7.19584L7.47422 5.10467H4.85487V3.14753C4.85487 3.14753 4.96454 2.30816 5.64363 2.30816Z" fill="black"/>
+            </svg>
+          </a>
+          <a href="mailto:adelacavia@gmail.com" className="text-stone-950 hover:opacity-80" aria-label="Email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
             </svg>
           </a>
         </motion.div>
@@ -144,10 +152,10 @@ export function Hero() {
 
         {/* Frases — Swanky */}
         {[
-          { left: 123, top: 203, text: "Buscando siempre lo que une por sobre lo que separa.", delay: 0.5 },
-          { left: 976, top: 179, text: "Curiosa por naturaleza en un mundo con tanto por descubrir.", delay: 0.45 },
-          { left: 175, top: 569, text: "Convencida de que todos podemos cambiar si nos los proponemos.", delay: 0.6 },
-          { left: 1004, top: 483, text: "Apasionada del conocimiento y de entender lo que mueve a las personas.", delay: 0.55 },
+          { left: 976, top: 179, text: "curiosa por naturaleza en un mundo con tanto por descubrir", delay: 0.45 },
+          { left: 1004, top: 483, text: "apasionada del conocimiento y de entender lo que mueve a las personas", delay: 0.55 },
+          { left: 175, top: 569, text: "convencida de que todos podemos cambiar si nos los proponemos", delay: 0.6 },
+          { left: 123, top: 203, text: "buscando siempre lo que une por sobre lo que separa", delay: 0.5 },
         ].map((item, i) => (
           <motion.p
             key={i}

@@ -1,13 +1,24 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Header, Hero } from "@/components/Header";
 import { InstagramFeed } from "@/components/InstagramFeed";
 import { AnimatedSection, AnimatedStagger, AnimatedItem } from "@/components/AnimatedSection";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
+  const [bioModalOpen, setBioModalOpen] = useState(false);
+  const [expandedTrabajando, setExpandedTrabajando] = useState<Record<number, boolean>>({ 0: false, 1: false, 2: false });
+  const [aseExpanded, setAseExpanded] = useState(false);
+  const [lideresExpanded, setLideresExpanded] = useState(false);
+  const [weHumanLabExpanded, setWeHumanLabExpanded] = useState(false);
+  useEffect(() => {
+    if (bioModalOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => { document.body.style.overflow = ""; };
+  }, [bioModalOpen]);
   return (
     <div className="w-full min-h-screen relative bg-white overflow-hidden">
       <Header />
@@ -23,18 +34,19 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 md:items-stretch gap-8 md:gap-12 px-6 py-12 md:px-[181px] md:py-16">
             {/* Columna izquierda: misma altura que la imagen (grid la iguala) */}
             <AnimatedSection className="flex flex-col min-h-0" direction="right" delay={0.1}>
-              <h2 className="text-red-400 text-5xl md:text-6xl font-light font-poppins uppercase tracking-[2.87px] leading-tight mb-4 md:mb-6">
+              <h2 className="text-[#C58770] text-5xl md:text-6xl font-light font-poppins uppercase tracking-[2.87px] leading-tight mb-4 md:mb-6">
                 Sobre mí
               </h2>
               <p className="text-black text-sm font-light font-poppins leading-7 max-w-[475px] flex-1">
                 Trabajé por más de 25 años en el mundo corporativo liderando equipos y desafíos muy diversos. Un día sentí que quería probar cosas nuevas e inicié este camino de transformación que me hace muy feliz. Me especialicé en el entrenamiento de competencias socioemocionales (human skills), en neurociencias aplicadas a la educación de adultos y en el desarrollo de herramientas para promover la capacidad de resiliencia. Desde entonces facilito procesos de cambio de personas y equipos con la idea de contribuir a generar nuevos liderazgos, más humanos y sustentables.
               </p>
-              <Link
-                href="#mas"
+              <button
+                type="button"
+                onClick={() => setBioModalOpen(true)}
                 className="inline-flex items-center justify-center w-28 h-8 mt-6 md:mt-8 bg-[#E6CC76] text-neutral-800 text-sm font-medium font-poppins leading-7 hover:bg-[#d4b96a] transition flex-shrink-0"
               >
                 Leer más
-              </Link>
+              </button>
             </AnimatedSection>
 
             {/* Columna derecha: imagen define la altura de la fila */}
@@ -51,7 +63,7 @@ export default function Home() {
       </section>
 
       {/* ¿En qué estoy trabajando? */}
-      <section className="relative py-24 bg-white">
+      <section id="trabajando" className="relative py-24 bg-white">
         <div className="max-w-[1474px] mx-auto px-6">
           {/* Imagen decorativa + título centrados */}
           <AnimatedSection className="flex flex-col items-center text-center mb-12" delay={0.1}>
@@ -72,57 +84,172 @@ export default function Home() {
             <AnimatedStagger staggerChildren={0.15} className="space-y-8">
               <AnimatedItem>
                 <div className="flex flex-col md:flex-row gap-6 items-start border-b border-[#A9B8C3] pb-8">
-              <div className="relative flex-shrink-0">
-                <Image src="/images/trabajando/07 1.png" alt="Experiencias de aprendizaje" width={95} height={95} className="object-contain" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-stone-900 text-base font-light font-poppins uppercase tracking-wide mb-2">
-                  EXPERIENCIAS DE APRENDIZAJE HUMAN SKILLS ACTIVE LEARNING
-                </h3>
-                <p className="text-black text-xs font-light font-poppins leading-6">
-                  Genero experiencias de aprendizaje activo a medida para equipos y organizaciones, buscando contribuir a nuevos estilos de trabajo y liderazgo, y enfocándome en el desarrollo de las llamadas Human Skills o Brain Capital Skills (algunas de las competencias que organismos como el World Economic Forum han definido como las habilidades del futuro — en realidad, ya del presente).
-                </p>
-              </div>
-              <div className="flex-shrink-0">
-                <Image src="/images/trabajando/BOTON EXPERIENCIAS.png" alt="" width={31} height={31} className="object-contain" />
-              </div>
-            </div>
+                  <div className="relative flex-shrink-0">
+                    <Image src="/images/trabajando/07 1.png" alt="Experiencias de aprendizaje" width={95} height={95} className="object-contain" />
+                  </div>
+                  <div className="flex-1 min-w-0 space-y-3">
+                    <h3 className="text-stone-900 text-base font-light font-poppins uppercase tracking-wide mb-2">
+                      Experiencias de aprendizaje – Human skills active learning
+                    </h3>
+                    <p className="text-black text-xs font-light font-poppins leading-6">
+                      Genero experiencias de aprendizaje activo a medida para equipos y organizaciones, buscando contribuir a nuevos estilos de trabajo y liderazgo, y enfocándome en el desarrollo de las llamadas Human Skills o Brain Capital Skills (algunas de las competencias que organismos como el World Economic Forum han definido como las habilidades del futuro — en realidad, ya del presente).
+                    </p>
+                    <AnimatePresence>
+                      {expandedTrabajando[0] && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="overflow-hidden space-y-3"
+                        >
+                          <p className="text-black text-xs font-light font-poppins leading-6">
+                            En un formato ágil y muy activo, enseñamos y ponemos en práctica herramientas para entrenar nuestra capacidad de regulación y co-regulación emocional, pensamiento crítico y funciones ejecutivas, diversidad y trabajo colaborativo, resiliencia individual y grupal, optimismo y emociones de bienestar, empatía, compasión y apreciación positiva, narrativa personal y propósito y liderazgo consciente, entre otras.
+                          </p>
+                          <p className="text-black text-xs font-light font-poppins leading-6 font-medium">
+                            Algunas de las experiencias de aprendizaje que más instrumentamos:
+                          </p>
+                          <ul className="text-black text-xs font-light font-poppins leading-6 list-disc pl-5 space-y-1">
+                            <li>Regulación y co-regulación emocional (gobernar nuestras emociones para sacar su máximo potencial y lograr mejores climas de trabajo)</li>
+                            <li>Capturar oportunidades en contextos desafiantes (la conexión entre la resiliencia individual y de equipos, el liderazgo y el trabajo en la diversidad)</li>
+                            <li>Future making (empoderar a las personas en el marco de las organizaciones para el desarrollo de sus propias carreras)</li>
+                            <li>Inteligencia colectiva y contagio emocional (para desarrollar el trabajo colaborativo desde la inteligencia emocional en el marco de equipos diversos y multigeneracionales)</li>
+                            <li>Liderazgo consciente: liderarme a mí mismo para poder liderar a otros (vinculado al propósito y generar estilos de liderazgo más humanos y colaborativos)</li>
+                            <li>Empatía, compasión y apreciación positiva (generando climas laborales positivos y mayor motivación en los equipos)</li>
+                            <li>Narrativa personal y grupal, liderazgo y propósito (somos lo que nos contamos. El poder de la narrativa para la construcción y el cambio personal y grupal)</li>
+                            <li>Desarrollo de fortalezas personales (no solo tenemos que trabajar lo que no nos sale bien, sino llevar al máximo potencial nuestras fortalezas)</li>
+                            <li>Neurociencia del Bienestar: aplicado a personas y equipos (herramientas concretas de la ciencia para aprender a generarnos emociones de bienestar)</li>
+                            <li>Neurociencia del cambio (todos podemos ser, si nos lo proponemos, escultores de nuestro propio cerebro y de nuestra emocionalidad)</li>
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setExpandedTrabajando((prev) => ({ ...prev, 0: !prev[0] }))}
+                    className="flex-shrink-0 p-1 text-black hover:opacity-70 transition-opacity"
+                    aria-expanded={expandedTrabajando[0]}
+                    aria-label={expandedTrabajando[0] ? "Cerrar sección" : "Desplegar más contenido"}
+                  >
+                    {expandedTrabajando[0] ? (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                        <path fill="none" d="m18 15l-6-6l-6 6" />
+                      </svg>
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                        <path fill="none" d="m6 9l6 6l6-6" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
               </AnimatedItem>
               <AnimatedItem>
-            <div className="flex flex-col md:flex-row gap-6 items-start border-b border-[#A9B8C3] pb-8">
-              <div className="relative flex-shrink-0">
-                <Image src="/images/trabajando/11 1.png" alt="Procesos de cambio cultural" width={98} height={98} className="object-contain" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-stone-900 text-base font-light font-poppins uppercase tracking-wide mb-2">
-                  Procesos de cambio cultural y desarrollo de culturas de bienestar
-                </h3>
-                <p className="text-black text-xs font-light font-poppins leading-6">
-                  Las culturas organizacionales pueden ser aceleradores del cambio o el obstáculo intangible más poderoso. <span className="text-yellow-600">En equipo con otros profesionales</span>, contribuimos a transformar culturas, desarrollando un recorrido que hemos probado con éxito. Especializados en el bienestar humano, gran parte de nuestro foco es contribuir a que las organizaciones desarrollen culturas de bienestar sustentable.
-                </p>
-              </div>
-              <div className="flex-shrink-0">
-                <Image src="/images/trabajando/BOTON ASESOR Y FACILIT.png" alt="" width={31} height={31} className="object-contain" />
-              </div>
-            </div>
+                <div className="flex flex-col md:flex-row gap-6 items-start border-b border-[#A9B8C3] pb-8">
+                  <div className="relative flex-shrink-0">
+                    <Image src="/images/trabajando/11 1.png" alt="Procesos de cambio cultural" width={98} height={98} className="object-contain" />
+                  </div>
+                  <div className="flex-1 min-w-0 space-y-3">
+                    <h3 className="text-stone-900 text-base font-light font-poppins uppercase tracking-wide mb-2">
+                      Procesos de cambio cultural y desarrollo de culturas de bienestar
+                    </h3>
+                    <p className="text-black text-xs font-light font-poppins leading-6">
+                      Las culturas organizacionales pueden ser aceleradores del cambio o el obstáculo intangible más poderoso. <Link href="#red-communia" className="text-yellow-600 underline hover:opacity-90">En equipo con otros profesionales</Link>, contribuimos a transformar culturas, desarrollando un recorrido que hemos probado con éxito. Especializados en el bienestar humano, gran parte de nuestro foco es contribuir a que las organizaciones desarrollen culturas de bienestar sustentable.
+                    </p>
+                    <AnimatePresence>
+                      {expandedTrabajando[1] && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="overflow-hidden space-y-3"
+                        >
+                          <p className="text-black text-xs font-light font-poppins leading-6">
+                            Hacemos un diagnóstico de la cultura actual, identificando problemas y desafíos clave de líderes, personas y procesos, y en equipo con la organización y con los responsables del área de Personas, desarrollamos e instrumentamos programas de aceleración dinámicos y flexibles para generar culturas en las que el bienestar sea parte de la ecuación. Empezando siempre por los líderes, los verdaderos promotores del cambio.
+                          </p>
+                          <ul className="text-black text-xs font-light font-poppins leading-6 list-disc pl-5 space-y-1">
+                            <li>Identificamos y entrenamos a &quot;hackers&quot; internos que, por su rol o estilo, contribuyen a potenciar la transformación desde adentro.</li>
+                            <li>Acompañamos todo el proceso con experiencias de aprendizaje, coaching y mentoría con las personas clave.</li>
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setExpandedTrabajando((prev) => ({ ...prev, 1: !prev[1] }))}
+                    className="flex-shrink-0 p-1 text-black hover:opacity-70 transition-opacity"
+                    aria-expanded={expandedTrabajando[1]}
+                    aria-label={expandedTrabajando[1] ? "Cerrar sección" : "Desplegar más contenido"}
+                  >
+                    {expandedTrabajando[1] ? (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                        <path fill="none" d="m18 15l-6-6l-6 6" />
+                      </svg>
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                        <path fill="none" d="m6 9l6 6l6-6" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
               </AnimatedItem>
               <AnimatedItem>
-            <div className="flex flex-col md:flex-row gap-6 items-start">
-              <div className="relative flex-shrink-0">
-                <Image src="/images/trabajando/15 1.png" alt="Coaching y Mentoreo" width={85} height={85} className="object-contain" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-stone-900 text-base font-light font-poppins uppercase tracking-wide mb-2">
-                  Coaching y Mentoreo
-                </h3>
-                <p className="text-black text-xs font-light font-poppins leading-6 text-justify">
-                  Basada en una formación sólida, pero con una gran experiencia personal en liderar proyectos y personas en organizaciones diversas, acompaño procesos de desarrollo para personas en situación de liderazgo a través de la mentoría o el coaching.
-                </p>
-              </div>
-              <div className="flex-shrink-0">
-                <Image src="/images/trabajando/BOTON COACHING Y MENTOREO.png" alt="" width={31} height={31} className="object-contain" />
-              </div>
-            </div>
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <div className="relative flex-shrink-0">
+                    <Image src="/images/trabajando/15 1.png" alt="Coaching y Mentoreo" width={85} height={85} className="object-contain" />
+                  </div>
+                  <div className="flex-1 min-w-0 space-y-3">
+                    <h3 className="text-stone-900 text-base font-light font-poppins uppercase tracking-wide mb-2">
+                      Coaching y Mentoreo
+                    </h3>
+                    <p className="text-black text-xs font-light font-poppins leading-6 text-justify">
+                      Basada en una formación sólida, pero con una gran experiencia personal en liderar proyectos y personas en organizaciones diversas, acompaño procesos de desarrollo para personas en situación de liderazgo a través de la mentoría o el coaching.
+                    </p>
+                    <AnimatePresence>
+                      {expandedTrabajando[2] && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="overflow-hidden space-y-3"
+                        >
+                          <p className="text-black text-xs font-light font-poppins leading-6 text-justify">
+                            El entrenamiento o coaching personal contribuye a que los ejecutivos y equipos de trabajo, en el marco de las organizaciones, refuercen su desarrollo profesional y personal, generando cambios de perspectiva y desplegando su potencial.
+                          </p>
+                          <p className="text-black text-xs font-light font-poppins leading-6 text-justify">
+                            Es un proceso que facilita el aprendizaje y promueve cambios cognitivos, emocionales y conductuales que expanden la capacidad de acción en función de metas propuestas.
+                          </p>
+                          <p className="text-black text-xs font-light font-poppins leading-6 text-justify">
+                            Se utiliza para acompañar retos profesionales complejos y cambios estratégicos y es útil para identificar y disminuir el GAP entre la situación actual versus la ideal definida por la persona o por la empresa para su rol, a través del desarrollo de un plan con acciones concretas de trabajo.
+                          </p>
+                          <p className="text-black text-xs font-light font-poppins leading-6 text-justify">
+                            Cada proceso se diseña en función de las necesidades individuales o grupales y de los objetivos que se consensúan.
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setExpandedTrabajando((prev) => ({ ...prev, 2: !prev[2] }))}
+                    className="flex-shrink-0 p-1 text-black hover:opacity-70 transition-opacity"
+                    aria-expanded={expandedTrabajando[2]}
+                    aria-label={expandedTrabajando[2] ? "Cerrar sección" : "Desplegar más contenido"}
+                  >
+                    {expandedTrabajando[2] ? (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                        <path fill="none" d="m18 15l-6-6l-6 6" />
+                      </svg>
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                        <path fill="none" d="m6 9l6 6l6-6" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
               </AnimatedItem>
             </AnimatedStagger>
           </div>
@@ -142,7 +269,7 @@ export default function Home() {
             />
           </div>
           <p className="text-stone-700 text-xl sm:text-2xl font-swanky font-normal leading-tight mb-1 md:mb-2">
-            Mi proyecto personal
+            We Human LAB – mi proyecto personal
           </p>
           <h2 className="text-yellow-600 text-3xl sm:text-4xl font-light font-poppins uppercase tracking-widest leading-tight mb-8 md:mb-12">
             WE HUMAN LAB
@@ -152,12 +279,45 @@ export default function Home() {
             <br /><br />
             A medida que la IA generativa asume muchas tareas cotidianas y entendemos que el mundo del trabajo está cambiando por completo debido a los avances de la tecnología, potenciar, cultivar y entrenar las competencias que nos hacen humanos será nuestro verdadero diferencial.
           </p>
-          <Link
-            href="#we-human-lab-mas"
+          <AnimatePresence>
+            {weHumanLabExpanded && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="overflow-hidden mb-8 md:mb-10"
+              >
+                <div className="text-black text-sm font-light font-poppins leading-7 max-w-[504px] mx-auto text-center space-y-4">
+                  <p>
+                    Al menos por el momento, hay cosas que la IA no puede hacer: no puede sentir, crear de la nada ni tener pensamiento crítico y ético. No puede liderar equipos diversos, no puede diagnosticar problemas de la nada, no puede empatizar (realmente empatizar) ni tener compasión. No siente curiosidad, ni tampoco miedo (y sabemos que el miedo es un gran motor del desarrollo). Y claro, tampoco puede experimentar el amor.
+                  </p>
+                  <p>
+                    Estas son cosas puramente humanas.
+                  </p>
+                  <p>
+                    Y las tenemos que llevar a nuestra máxima expresión.
+                  </p>
+                  <p>
+                    La IA asume de manera genial tareas, analiza datos masivos y encuentra patrones de una manera que los humanos no podemos lograr. Pero cuando los problemas son complejos (y espinosos), demandan pensamiento crítico, creatividad genuina y trabajo colaborativo. Vivimos en un mundo demasiado complejo como para que pocas personas tengan las respuestas y por eso la colaboración seguirá siendo (lo fue desde el inicio de la humanidad, como detectó Darwin) la herramienta más valiosa de supervivencia.
+                  </p>
+                  <p>
+                    La transformación que estamos atravesando es de la economía del conocimiento a la economía relacional. Y requerirá que todos podamos desarrollar esas capacidades de vincularnos en la diversidad y en entornos complejos y cambiantes, en los que podamos expresar, debatir y cooperar sobre pensamientos divergentes con empatía y escucha genuina, con colaboración y agilidad emocional y social.
+                  </p>
+                  <p>
+                    En este proyecto personal me propongo estudiar, analizar, compartir, divulgar y contribuir a entrenar estas competencias.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <button
+            type="button"
+            onClick={() => setWeHumanLabExpanded((prev) => !prev)}
             className="inline-flex items-center justify-center min-w-[7rem] h-8 px-4 bg-[#E6CC76] text-neutral-800 text-sm font-medium font-poppins leading-7 hover:bg-[#d4b96a] transition"
           >
-            Leer más
-          </Link>
+            {weHumanLabExpanded ? "Leer menos" : "Leer más"}
+          </button>
         </AnimatedSection>
       </section>
 
@@ -170,33 +330,38 @@ export default function Home() {
                 RED COMMUNIA
               </h2>
               <p className="text-stone-700 text-xl sm:text-2xl font-swanky font-normal leading-tight">
-                Mi red de trabajo
+                RedCommunia – mi red de trabajo
               </p>
             </AnimatedSection>
             <AnimatedSection className="order-1 lg:order-2 lg:max-w-none" direction="left" delay={0.15}>
               <p className="text-black text-sm font-light font-poppins leading-7 max-w-[604px] lg:max-w-none">
-                Muchos de los proyectos que desarrollamos e implementamos requieren de un gran equipo. Para ello, armé RedCommunia, una red colaborativa de trabajo conformada por psicólogos, pedagogos, sociólogos, counselors y coaches cuya filosofía es la iteración, exploración e integración de ideas, conocimientos y abordajes.
+                Muchos de los proyectos que desarrollamos e implementamos requieren de un gran equipo. Para ello, armé{" "}
+                <a
+                  href="https://www.redcommunia.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-yellow-600 font-normal underline hover:opacity-90"
+                >
+                  RedCommunia
+                </a>
+                , una red colaborativa de trabajo conformada por psicólogos, pedagogos, sociólogos, counselors y coaches cuya filosofía es la iteración, exploración e integración de ideas, conocimientos y abordajes.
               </p>
             </AnimatedSection>
           </div>
 
           <AnimatedSection className="relative overflow-hidden -mx-6 px-6 py-8 md:py-10" delay={0.2}>
-            <div className="absolute inset-0 -z-10">
-              <Image src="/images/trabajando/Vector 39.png" alt="" fill className="object-cover" />
-            </div>
-            <div className="absolute inset-0 opacity-30 bg-orange-300/25 -z-10" />
             <div className="relative flex flex-wrap justify-center gap-6 sm:gap-4 md:gap-6 lg:flex-nowrap lg:justify-between lg:gap-4">
             {[
-              "Ercilia Braun",
-              "Adela Saénz Cavia",
-              "Miguel Espeche",
-              "Osvaldo Rivolt",
-              "María Eugenia Barrio",
-              "Lucía Franchi",
-              "Fabiana García Lago",
-            ].map((name, i) => (
+              { name: "Ercilia Braun", image: "/images/red/ercilia.png" },
+              { name: "Adela Saénz Cavia", image: "/images/red/adela.png" },
+              { name: "Miguel Espeche", image: "/images/red/miguel.png" },
+              { name: "Osvaldo Rivolt", image: "/images/red/osvaldo.png" },
+              { name: "María Eugenia Barrio", image: "/images/red/maria.png" },
+              { name: "Lucía Franchi", image: "/images/red/lucia.png" },
+              { name: "Fabiana García Lago", image: "/images/red/fabiana.png" },
+            ].map((person, i) => (
               <motion.div
-                key={name}
+                key={person.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -205,16 +370,15 @@ export default function Home() {
               >
                 <div className={`relative w-24 h-24 sm:w-32 sm:h-32 rounded-full border border-stone-400 overflow-hidden ${i === 6 ? "bg-zinc-300" : "bg-stone-100"}`}>
                   <Image
-                    src="https://placehold.co/133x128"
-                    alt={name}
+                    src={person.image}
+                    alt={person.name}
                     width={128}
                     height={128}
                     className="w-full h-full object-cover"
-                    unoptimized
                   />
                 </div>
-                <span className={`mt-2 text-base sm:text-xl font-swanky font-normal capitalize leading-tight text-center ${i === 1 ? "text-yellow-600" : "text-black"}`}>
-                  {name}
+                <span className="mt-2 text-base sm:text-xl font-swanky font-normal leading-tight text-center text-black hover:text-yellow-600 transition-colors cursor-default">
+                  {person.name}
                 </span>
               </motion.div>
             ))}
@@ -224,28 +388,28 @@ export default function Home() {
       </section>
 
       {/* ¿Qué te apasiona? / Mi libro */}
-      <section className="relative overflow-hidden bg-white py-8 sm:py-12 lg:py-0">
-        <div className="mx-auto flex flex-col lg:flex-row">
+      <section id="libro" className="relative overflow-hidden bg-[#FFF9FA] py-8 sm:py-12 lg:py-0">
+        <div className="mx-auto flex flex-col lg:flex-row pl-4 sm:pl-6 lg:pl-8 xl:pl-12 bg-[#FFF9FA]">
           {/* Imagen del libro */}
-          <AnimatedSection className="w-full aspect-[490/583] lg:w-[380px] xl:w-[490px] lg:flex-shrink-0 lg:aspect-[490/583] relative" direction="right" delay={0.1}>
+          <AnimatedSection className="w-full aspect-[490/583] lg:w-[380px] xl:w-[490px] lg:flex-shrink-0 lg:aspect-[490/583] relative bg-[#FFF9FA]" direction="right" delay={0.1}>
             <Image
-              src="/images/Adela Saenz Cavia137 2.png"
+              src="/images/libro.png"
               alt="Libro ¿Qué te apasiona?"
               width={490}
               height={583}
-              className="w-full h-full object-cover object-top shadow-[0px_0px_23.5px_1px_rgba(0,0,0,0.05)]"
+              className="w-full h-full object-cover object-top"
               unoptimized
             />
           </AnimatedSection>
           {/* Zona de contenido con fondo rosa - texto centrado verticalmente */}
-          <AnimatedSection className="relative flex-1 flex flex-col lg:flex-row lg:items-center lg:justify-center min-h-0 px-4 sm:px-6 lg:px-8 xl:px-12 xl:pl-[min(6rem,97px)] py-8 sm:py-10 lg:py-12" direction="left" delay={0.15}>
-            <div className="absolute inset-0 bg-rose-100/70 opacity-30 shadow-[0px_4px_5.1px_0px_rgba(0,0,0,0.25)] pointer-events-none" aria-hidden />
+          <AnimatedSection className="relative flex-1 flex flex-col lg:flex-row lg:items-center lg:justify-center min-h-0 px-4 sm:px-6 lg:px-6 xl:px-8 lg:pl-8 xl:pl-10 py-8 sm:py-10 lg:py-12 bg-[#FFF9FA]" direction="left" delay={0.15}>
+            <div className="absolute inset-0 bg-[#FFF9FA] pointer-events-none" aria-hidden />
             <div className="relative z-10 flex flex-wrap items-center justify-center lg:justify-center gap-6 lg:gap-8 w-full">
               <div className="flex flex-col justify-center w-full min-w-0 max-w-[480px]">
                 <h2 className="text-stone-900 text-2xl sm:text-3xl lg:text-4xl font-light font-poppins uppercase tracking-widest leading-tight mb-2">
                   ¿Qué te apasiona?
                 </h2>
-                <p className="text-red-400 text-xl sm:text-2xl font-swanky font-normal tracking-wide leading-none origin-top-left -rotate-[2.31deg] mb-4 sm:mb-6">
+                <p className="text-[#C58770] text-xl sm:text-2xl font-swanky font-normal tracking-wide leading-none origin-top-left -rotate-[2.31deg] mb-4 sm:mb-6">
                   Mi libro
                 </p>
                 <div className="text-justify text-black text-sm font-light font-poppins leading-7 mb-6 sm:mb-8">
@@ -301,12 +465,45 @@ export default function Home() {
               <p className="text-stone-900 text-sm font-light font-poppins leading-7 max-w-[478px] mb-8">
                 Como me moviliza mucho la desigualdad, he diseñado, implementado y medido el impacto individual y comunitario de programas de entrenamiento socioemocional con referentes y líderes sociales de barrios populares, especialmente en la ciudad de Buenos Aires y el conurbano, pero también en Córdoba y Santiago del Estero. Los programas buscan acelerar la transformación social contribuyendo a la formación de liderazgos sociales.
               </p>
-              <Link
-                href="#lideres"
+              <AnimatePresence>
+                {lideresExpanded && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="overflow-hidden mb-8 max-w-[478px]"
+                  >
+                    <div className="text-stone-900 text-sm font-light font-poppins leading-7 space-y-4">
+                      <p>
+                        Sabemos que las competencias emocionales y sociales se pueden entrenar y hacerlo con personas que tienen tanto impacto social comunitario y que, además, muchas de ellas han nacido y viven en entornos de vulneración de derechos, es no solo un desafío personal, sino también un proyecto que me llena de ilusión y de esperanza.
+                      </p>
+                      <p>
+                        Los resultados alcanzados en estos programas, por los que han pasado más de 400 referentes y líderes comunitarios, son alucinantes y muy positivos y así lo refieren ellos/as mismos/as ya que estos proyectos se miden y evalúan (y son parte de mi tesis de doctorado en Psicología social).
+                      </p>
+                      <p>
+                        Algunos de los programas que hemos implementado, como el programa &quot;Mujeres al frente&quot; realizado en Ciudad de Buenos Aires y que lleva ya 8 ediciones o el programa &quot;Con voz popular&quot; que cumplió su 5ta edición u otros programas como el realizado con espacios comunitarios del Conurbano (Quilmes, Florencio Varela, La Matanza, José C Paz, Polvorines, Alto San Isidro) han mostrado resultados preciosos que se condensan en algunas de las palabras que los mismos referentes nos dicen:
+                      </p>
+                      <p className="italic">
+                        &quot;En este programa aprendí a desnudar mi alma. Fue difícil, pero me permitió aceptarme como soy, reconocer, además de mis partes oscuras, también mi lado luminoso, reconocer mis fortalezas y desde allí abrirme al aprendizaje...&quot; – referente Barrio Villa Itatí, Quilmes.
+                      </p>
+                      <p className="italic">
+                        &quot;En nuestros encuentros empecé a conocer mi interioridad, a conectarme con mi debilidad y a validarla, a hablar de lo que nos frustra y de qué podemos hacer para gestionar esa frustración. Y dejarme finalmente habitar por el amor y por esa sensación de sentirme parte de algo más grande&quot; – referenta social Barrio Almafuerte, La Matanza.
+                      </p>
+                      <p>
+                        La idea es que, desde ese aprendizaje, generado colaborativamente, los referentes y educadores sociales puedan hacerse cargo del poder que tienen y que, poniendo en valor su muy rico universo emocional, éste se convierta en su motor para la acción.
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <button
+                type="button"
+                onClick={() => setLideresExpanded((prev) => !prev)}
                 className="inline-flex items-center justify-center w-28 h-8 bg-[#E6CC76] text-neutral-800 text-sm font-medium font-poppins leading-7 hover:bg-[#d4b96a] transition"
               >
-                Leer más
-              </Link>
+                {lideresExpanded ? "Leer menos" : "Leer más"}
+              </button>
             </AnimatedSection>
             {/* Columna derecha: imagen */}
             <AnimatedSection className="relative w-full mt-8 md:mt-0 md:-mt-4 order-first md:order-none md:max-w-[720px]" direction="left" delay={0.15}>
@@ -344,7 +541,7 @@ export default function Home() {
             </h2>
             <div className="flex flex-wrap justify-center gap-3">
               <Link
-                href="https://www.lanacion.com.ar"
+                href="https://www.lanacion.com.ar/autor/adela-saenz-cavia-13016/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center min-w-[7rem] h-8 px-4 bg-red-200 text-stone-600 hover:bg-red-300 text-sm font-medium font-poppins leading-7 transition"
@@ -352,7 +549,7 @@ export default function Home() {
                 LA NACIÓN
               </Link>
               <Link
-                href="https://linktr.ee"
+                href="https://linktr.ee/Adela.Cavia?utm_source=linktree_profile_share&ltsid=c0955618-bdcc-459b-be9c-9f925a9bdd40"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center min-w-[7rem] h-8 px-4 bg-red-200 text-stone-600 hover:bg-red-300 text-sm font-medium font-poppins leading-7 transition"
@@ -410,13 +607,30 @@ export default function Home() {
                 </Link>
                 <span className="text-yellow-600 font-normal">,</span>{" "}
                 que demuestran que una educación que promueve el aprendizaje socioemocional tiene un impacto positivo en las habilidades, actitudes y comportamiento, en el rendimiento académico, el bienestar emocional, los vínculos y los climas de aula, entre otros.
+                <AnimatePresence>
+                  {aseExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="overflow-hidden"
+                    >
+                      <br />
+                      Muchas escuelas están implementando el aprendizaje socioemocional como una forma de contribuir a un mejor aprendizaje.
+                      <br /><br />
+                      Como formadora en educación emocional, he diseñado, instrumentado y medido la aplicación de estos programas en el ámbito escolar. Posiblemente el ejemplo que más orgullo me genera es el programa que instrumentamos en el marco de las escuelas públicas del Municipio de Vicente López.
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <Link
-                href="#ase"
+              <button
+                type="button"
+                onClick={() => setAseExpanded((prev) => !prev)}
                 className="inline-flex items-center justify-center w-28 h-8 bg-orange-300 text-neutral-800 text-sm font-medium font-poppins leading-7 hover:opacity-90 transition"
               >
-                Leer más
-              </Link>
+                {aseExpanded ? "Leer menos" : "Leer más"}
+              </button>
             </AnimatedSection>
 
             {/* Columna derecha: imagen con overlay y botón play */}
@@ -548,6 +762,70 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Modal Sobre mí – Bio */}
+      <AnimatePresence>
+        {bioModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+            onClick={() => setBioModalOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-2xl max-h-[85vh] overflow-hidden rounded-lg bg-white shadow-xl flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex-shrink-0 flex items-center justify-between px-6 py-4 border-b border-stone-200">
+                <h3 className="text-red-400 text-xl md:text-2xl font-light font-poppins uppercase tracking-wide">
+                  Sobre mí – Bio
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setBioModalOpen(false)}
+                  className="p-2 text-stone-500 hover:text-stone-800 hover:bg-stone-100 rounded-full transition"
+                  aria-label="Cerrar"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto px-6 py-6 space-y-4 text-black text-sm font-light font-poppins leading-7">
+                <p>
+                  Trabajé por más de 25 años en el mundo corporativo liderando equipos y desafíos muy diversos. Un día sentí que quería probar cosas nuevas e inicié este camino de transformación que me hace muy feliz. Me especialicé en el entrenamiento de competencias socioemocionales (human skills), en neurociencias aplicadas a la educación de adultos y en el desarrollo de herramientas para promover la capacidad de resiliencia. Desde entonces facilito procesos de cambio de personas y equipos con la idea de contribuir a generar nuevos liderazgos, más humanos y sustentables.
+                </p>
+                <p>
+                  Me encanta aprender cosas nuevas. Mi carrera de grado es la Ciencia Política, pero desde entonces he hecho 2 maestrías (una en Comunicación y la otra en Inteligencia emocional y psicología positiva), muchos postgrados (los últimos en Educación emocional, Neuroeducación y Psicología organizacional). También soy Coach certificada y Counselor Laboral. Y estoy a punto de defender mi tesis para acceder al grado de Doctora en Psicología, con foco en psicología social.
+                </p>
+                <p>
+                  Creo que, en un mundo en cambio constante (ya lo dijo el filósofo), la flexibilidad cognitiva y emocional es clave y que todos debemos entrenar al máximo aquello que nos hace humanos (algo que estudio y desarrollo en el proyecto: We human) y que defino como &quot;human skills&quot; y que te cuento más abajo en detalle.
+                </p>
+                <p>
+                  Me moviliza mucho la desigualdad social, por lo que mi propósito personal es generar puentes entre personas diversas con el objetivo de compartir y multiplicar aprendizajes con impacto social. Para responder a esta inquietud tan grande, diseño y desarrollo programas de entrenamiento para líderes sociales de barrios populares, cuyo impacto es multiplicador y me asombra muchísimo.
+                </p>
+                <p>
+                  Además, y con la idea de socializar estos aprendizajes y conocimientos, soy divulgadora en diferentes medios de comunicación y en redes sociales y he producido trabajos académicos vinculados al impacto positivo que tiene el entrenamiento emocional y para la resiliencia en diferentes ámbitos.
+                </p>
+                <p>
+                  Represento en Buenos Aires a la{" "}
+                  <a href="https://rieeb.com" target="_blank" rel="noopener noreferrer" className="text-[#C58770] underline hover:opacity-90">RIEEB – Red Internacional de Educación emocional y bienestar</a> (rieeb.com) de la que también soy formadora y colaboro con organizaciones sociales cuyas causas comparto: soy mentora de{" "}
+                  <a href="https://vocesvitales.org.ar/" target="_blank" rel="noopener noreferrer" className="text-[#C58770] underline hover:opacity-90">Voces Vitales</a> (https://vocesvitales.org.ar/), la ONG global dedicada al empoderamiento de las mujeres, y colaboro activamente con{" "}
+                  <a href="https://portalril.org/ar/" target="_blank" rel="noopener noreferrer" className="text-[#C58770] underline hover:opacity-90">RIL – Red de Innovación Local</a> (https://portalril.org/ar/), con{" "}
+                  <a href="https://potenciaargentina.org/" target="_blank" rel="noopener noreferrer" className="text-[#C58770] underline hover:opacity-90">Potencia+</a> (https://potenciaargentina.org/) y con la fundación{" "}
+                  <a href="https://www.ensenaporargentina.org/" target="_blank" rel="noopener noreferrer" className="text-[#C58770] underline hover:opacity-90">Enseña por Argentina</a> (https://www.ensenaporargentina.org/).
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Footer */}
       <motion.footer
         initial={{ opacity: 0 }}
@@ -556,11 +834,11 @@ export default function Home() {
         transition={{ duration: 0.5 }}
         className="w-full h-28 bg-[#C58770] flex flex-wrap items-center justify-center gap-8 md:gap-16 py-6 px-6"
       >
-        <a href="https://linkedin.com" className="text-orange-100 text-lg font-poppins hover:text-white transition">Usuario Linkedin</a>
-        <a href="https://instagram.com" className="text-orange-100 text-lg font-poppins hover:text-white transition">@cuenta instagram</a>
-        <a href="https://x.com" className="text-orange-100 text-lg font-poppins hover:text-white transition">@cuenta X</a>
-        <a href="https://facebook.com" className="text-orange-100 text-lg font-poppins hover:text-white transition">cuenta facebook</a>
-        <a href="mailto:contacto@example.com" className="text-orange-100 text-lg font-poppins hover:text-white transition">@mail</a>
+        <a href="https://www.linkedin.com/in/adelacavia" target="_blank" rel="noopener noreferrer" className="text-orange-100 text-lg font-poppins hover:text-white transition">LinkedIn</a>
+        <a href="https://instagram.com/adela.cavia" target="_blank" rel="noopener noreferrer" className="text-orange-100 text-lg font-poppins hover:text-white transition">@adela.cavia</a>
+        <a href="https://x.com/Adel1ta" target="_blank" rel="noopener noreferrer" className="text-orange-100 text-lg font-poppins hover:text-white transition">@Adel1ta</a>
+        <a href="https://www.facebook.com/adela.cavia/" target="_blank" rel="noopener noreferrer" className="text-orange-100 text-lg font-poppins hover:text-white transition">Facebook</a>
+        <a href="mailto:adelacavia@gmail.com" className="text-orange-100 text-lg font-poppins hover:text-white transition">adelacavia@gmail.com</a>
       </motion.footer>
     </div>
   );
