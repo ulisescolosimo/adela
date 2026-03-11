@@ -15,6 +15,8 @@ export default function Home() {
   const [weHumanLabExpanded, setWeHumanLabExpanded] = useState(false);
   const [aseVideoPlaying, setAseVideoPlaying] = useState(false);
   const aseVideoRef = useRef<HTMLVideoElement>(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
+  const gallerySliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (aseVideoPlaying && aseVideoRef.current) {
@@ -668,26 +670,113 @@ export default function Home() {
             </div>
           </AnimatedSection>
 
-          {/* Galería: masonry con animación stagger */}
-          <AnimatedStagger staggerChildren={0.1} delayChildren={0.15} className="relative w-full max-w-[900px] mx-auto columns-2 md:columns-3 gap-4 space-y-4">
-            {[
-              { src: "/images/galeria/1.png", alt: "Publicación 1", aspect: "aspect-[256/384]" },
-              { src: "/images/galeria/2.png", alt: "Publicación 2", aspect: "aspect-[288/384]" },
-              { src: "/images/galeria/3.png", alt: "Publicación 3", aspect: "aspect-[456/288]" },
-              { src: "/images/galeria/4.png", alt: "Publicación 4", aspect: "aspect-[384/288]" },
-              { src: "/images/galeria/5.png", alt: "Publicación 5", aspect: "aspect-[224/288]" },
-            ].map((item, i) => (
-              <AnimatedItem key={i} className="break-inside-avoid mb-4">
-                <motion.div
-                  className={`relative w-full ${item.aspect} overflow-hidden`}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
+          {/* Slider de galerías: cada slide es un grid completo; el scroll cambia de galería */}
+          <div className="relative w-full max-w-[900px] mx-auto">
+            <div
+              ref={gallerySliderRef}
+              className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-8 pb-4 scrollbar-hide"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              onScroll={(e) => {
+                const el = e.currentTarget;
+                const index = Math.round(el.scrollLeft / (el.offsetWidth + 32));
+                setGalleryIndex(Math.min(2, Math.max(0, index)));
+              }}
+            >
+              {[
+                [
+                  { src: "/images/galeria/1.png", alt: "Publicación 1", aspect: "aspect-[256/384]" },
+                  { src: "/images/galeria/2.png", alt: "Publicación 2", aspect: "aspect-[288/384]" },
+                  { src: "/images/galeria/3.png", alt: "Publicación 3", aspect: "aspect-[456/288]" },
+                  { src: "/images/galeria/4.png", alt: "Publicación 4", aspect: "aspect-[384/288]" },
+                  { src: "/images/galeria/5.png", alt: "Publicación 5", aspect: "aspect-[224/288]" },
+                ],
+                [
+                  { src: "/images/galeria2/DSC06604%202.png", alt: "Galería 2 - 1", aspect: "aspect-[256/384]" },
+                  { src: "/images/galeria2/Visualizar%201%20(1).png", alt: "Galería 2 - 2", aspect: "aspect-[288/384]" },
+                  { src: "/images/galeria2/DSC04123%201%20(1).png", alt: "Galería 2 - 3", aspect: "aspect-[456/288]" },
+                  { src: "/images/galeria2/DSC06604%201%20(1).png", alt: "Galería 2 - 4", aspect: "aspect-[384/288]" },
+                  { src: "/images/galeria2/IMG_0362%201%20(1).png", alt: "Galería 2 - 5", aspect: "aspect-[224/288]" },
+                ],
+                [
+                  { src: "/images/galeria3/Visualizar%203%20(1).png", alt: "Galería 3 - 1", aspect: "aspect-[256/384]" },
+                  { src: "/images/galeria3/Visualizar%201%20(2).png", alt: "Galería 3 - 2", aspect: "aspect-[288/384]" },
+                  { src: "/images/galeria3/DSC04123%201%20(2).png", alt: "Galería 3 - 3", aspect: "aspect-[456/288]" },
+                  { src: "/images/galeria3/IMG_0362%201%20(2).png", alt: "Galería 3 - 4", aspect: "aspect-[384/288]" },
+                  { src: "/images/galeria3/DSC06604%201%20(2).png", alt: "Galería 3 - 5", aspect: "aspect-[224/288]" },
+                ],
+              ].map((items, galleryIdx) => (
+                <div
+                  key={galleryIdx}
+                  className="flex-shrink-0 w-full max-w-[900px] snap-center"
+                  style={{ scrollSnapAlign: "center" }}
                 >
-                  <Image src={item.src} alt={item.alt} fill className="object-cover" sizes="(max-width: 768px) 45vw, 280px" />
-                </motion.div>
-              </AnimatedItem>
-            ))}
-          </AnimatedStagger>
+                  <AnimatedStagger staggerChildren={0.1} delayChildren={0.15} className="relative w-full columns-2 md:columns-3 gap-4 space-y-4">
+                    {items.map((item, i) => (
+                      <AnimatedItem key={i} className="break-inside-avoid mb-4">
+                        <motion.div
+                          className={`relative w-full ${item.aspect} overflow-hidden`}
+                          whileHover={{ scale: 1.02 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <Image src={item.src} alt={item.alt} fill className="object-cover" sizes="(max-width: 768px) 45vw, 280px" />
+                        </motion.div>
+                      </AnimatedItem>
+                    ))}
+                  </AnimatedStagger>
+                </div>
+              ))}
+            </div>
+            {/* Controles: flechas y puntos */}
+            <div className="flex items-center justify-center gap-4 mt-4">
+              <button
+                type="button"
+                onClick={() => {
+                  const el = gallerySliderRef.current;
+                  if (el) {
+                    const w = el.offsetWidth + 32;
+                    el.scrollTo({ left: Math.max(0, el.scrollLeft - w), behavior: "smooth" });
+                  }
+                }}
+                disabled={galleryIndex === 0}
+                className="p-2 text-[#C58770] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#C58770]/10 rounded transition"
+                aria-label="Galería anterior"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <div className="flex gap-2">
+                {[0, 1, 2].map((idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => {
+                      const el = gallerySliderRef.current;
+                      if (el) {
+                        const w = el.offsetWidth + 32;
+                        el.scrollTo({ left: idx * w, behavior: "smooth" });
+                      }
+                    }}
+                    className={`w-2.5 h-2.5 rounded-full transition ${galleryIndex === idx ? "bg-[#C58770]" : "bg-[#C58770]/40 hover:bg-[#C58770]/60"}`}
+                    aria-label={`Ir a galería ${idx + 1}`}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const el = gallerySliderRef.current;
+                  if (el) {
+                    const w = el.offsetWidth + 32;
+                    el.scrollTo({ left: Math.min(el.scrollWidth - el.offsetWidth, el.scrollLeft + w), behavior: "smooth" });
+                  }
+                }}
+                disabled={galleryIndex === 2}
+                className="p-2 text-[#C58770] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#C58770]/10 rounded transition"
+                aria-label="Galería siguiente"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
