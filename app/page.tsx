@@ -18,11 +18,65 @@ export default function Home() {
   const [galleryIndex, setGalleryIndex] = useState(0);
   const gallerySliderRef = useRef<HTMLDivElement>(null);
 
+  // Contact form state
+  const [contactNombre, setContactNombre] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMensaje, setContactMensaje] = useState("");
+  const [contactLoading, setContactLoading] = useState(false);
+  const [contactSuccess, setContactSuccess] = useState(false);
+  const [contactError, setContactError] = useState<string | null>(null);
+
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setContactError(null);
+    setContactSuccess(false);
+    setContactLoading(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: contactNombre.trim(),
+          email: contactEmail.trim(),
+          mensaje: contactMensaje.trim(),
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setContactError(data.error ?? "Error al enviar. Intentá de nuevo.");
+        return;
+      }
+      setContactSuccess(true);
+      setContactNombre("");
+      setContactEmail("");
+      setContactMensaje("");
+    } catch {
+      setContactError("Error de conexión. Intentá de nuevo.");
+    } finally {
+      setContactLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (aseVideoPlaying && aseVideoRef.current) {
       aseVideoRef.current.play();
     }
   }, [aseVideoPlaying]);
+
+  // Auto-avance de galería cada 3 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const el = gallerySliderRef.current;
+      if (!el) return;
+      const w = el.offsetWidth + 32;
+      setGalleryIndex((prev) => {
+        const next = (prev + 1) % 5;
+        el.scrollTo({ left: next * w, behavior: "smooth" });
+        return next;
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="w-full min-h-screen relative bg-white overflow-hidden">
@@ -655,7 +709,7 @@ export default function Home() {
                 href="https://www.lanacion.com.ar/autor/adela-saenz-cavia-13016/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center min-w-[7rem] h-8 px-4 bg-red-200 text-stone-600 hover:bg-red-300 text-sm font-medium font-poppins leading-7 transition"
+                className="inline-flex items-center justify-center min-w-[7rem] h-8 px-4 bg-red-200 text-[#966452] hover:bg-red-300 text-sm font-medium font-poppins leading-7 transition"
               >
                 LA NACIÓN
               </Link>
@@ -663,7 +717,7 @@ export default function Home() {
                 href="https://linktr.ee/Adela.Cavia?utm_source=linktree_profile_share&ltsid=c0955618-bdcc-459b-be9c-9f925a9bdd40"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center min-w-[7rem] h-8 px-4 bg-red-200 text-stone-600 hover:bg-red-300 text-sm font-medium font-poppins leading-7 transition"
+                className="inline-flex items-center justify-center min-w-[7rem] h-8 px-4 bg-red-200 text-[#966452] hover:bg-red-300 text-sm font-medium font-poppins leading-7 transition"
               >
                 LINKTREE
               </Link>
@@ -892,7 +946,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Instagram - últimas 3 publicaciones */}
+      {/* Instagram - últimas 3 publicaciones (oculto por ahora) */}
+      {false && (
       <section className="relative w-full bg-[#EBD5CD] overflow-hidden">
         <div className="relative max-w-[1474px] mx-auto px-6 py-12 md:py-16">
           <AnimatedSection className="flex flex-col items-center" delay={0.1}>
@@ -949,6 +1004,7 @@ export default function Home() {
           </AnimatedSection>
         </div>
       </section>
+      )}
 
       {/* Contacto - Form section */}
       <section id="contacto" className="relative w-full bg-white overflow-hidden">
@@ -967,7 +1023,7 @@ export default function Home() {
             {/* Columna derecha: título + form */}
             <AnimatedSection className="flex flex-col items-center justify-center px-6 md:px-12 lg:px-16 py-12 lg:py-16" direction="left" delay={0.15}>
               <div className="flex items-start gap-4 mb-8">
-                <h2 className="text-red-400 text-3xl font-normal font-swanky leading-[96px] tracking-wider">
+                <h2 className="text-[#C58770] text-3xl font-normal font-swanky leading-[96px] tracking-wider">
                   ¡Enviame un mensaje!
                 </h2>
                 <div className="relative w-28 h-28 flex-shrink-0">
@@ -979,7 +1035,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <form className="space-y-4 w-full max-w-[462px]" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-4 w-full max-w-[462px]" onSubmit={handleContactSubmit}>
                 <div>
                   <label htmlFor="nombre" className="block text-black/70 text-base font-light font-poppins leading-7">Nombre y Apellido</label>
                   <input
@@ -987,7 +1043,11 @@ export default function Home() {
                     type="text"
                     name="nombre"
                     placeholder=" "
-                    className="w-full mt-1 py-2 bg-transparent border-0 border-b border-[#C58770]/50 focus:border-[#C58770] focus:outline-none text-black text-base font-light font-poppins leading-7 placeholder:text-black/40"
+                    value={contactNombre}
+                    onChange={(e) => setContactNombre(e.target.value)}
+                    required
+                    disabled={contactLoading}
+                    className="w-full mt-1 py-2 bg-transparent border-0 border-b border-[#C58770]/50 focus:border-[#C58770] focus:outline-none text-black text-base font-light font-poppins leading-7 placeholder:text-black/40 disabled:opacity-60"
                   />
                 </div>
                 <div>
@@ -997,7 +1057,11 @@ export default function Home() {
                     type="email"
                     name="email"
                     placeholder=" "
-                    className="w-full mt-1 py-2 bg-transparent border-0 border-b border-[#C58770]/50 focus:border-[#C58770] focus:outline-none text-black text-base font-light font-poppins leading-7 placeholder:text-black/40"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    required
+                    disabled={contactLoading}
+                    className="w-full mt-1 py-2 bg-transparent border-0 border-b border-[#C58770]/50 focus:border-[#C58770] focus:outline-none text-black text-base font-light font-poppins leading-7 placeholder:text-black/40 disabled:opacity-60"
                   />
                 </div>
                 <div>
@@ -1007,14 +1071,25 @@ export default function Home() {
                     name="mensaje"
                     placeholder=" "
                     rows={4}
-                    className="w-full mt-1 py-2 bg-transparent border-0 border-b border-[#C58770]/50 focus:border-[#C58770] focus:outline-none text-black text-base font-light font-poppins leading-7 placeholder:text-black/40 resize-y min-h-[100px]"
+                    value={contactMensaje}
+                    onChange={(e) => setContactMensaje(e.target.value)}
+                    required
+                    disabled={contactLoading}
+                    className="w-full mt-1 py-2 bg-transparent border-0 border-b border-[#C58770]/50 focus:border-[#C58770] focus:outline-none text-black text-base font-light font-poppins leading-7 placeholder:text-black/40 resize-y min-h-[100px] disabled:opacity-60"
                   />
                 </div>
+                {contactError && (
+                  <p className="text-red-600 text-sm font-poppins">{contactError}</p>
+                )}
+                {contactSuccess && (
+                  <p className="text-green-700 text-sm font-poppins">Mensaje enviado correctamente.</p>
+                )}
                 <button
                   type="submit"
-                  className="mt-6 w-24 h-8 bg-[#C58770] flex items-center justify-center text-white text-sm font-medium font-poppins uppercase leading-7 hover:bg-[#b07860] transition"
+                  disabled={contactLoading}
+                  className="mt-6 w-24 h-8 bg-[#C58770] flex items-center justify-center text-white text-sm font-medium font-poppins uppercase leading-7 hover:bg-[#b07860] transition disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  enviar
+                  {contactLoading ? "..." : "enviar"}
                 </button>
               </form>
             </AnimatedSection>
