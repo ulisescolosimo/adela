@@ -18,6 +18,24 @@ export default function Home() {
   const [galleryIndex, setGalleryIndex] = useState(0);
   const gallerySliderRef = useRef<HTMLDivElement>(null);
 
+const TOTAL_GALLERIES = 3;
+
+const scrollToGallery = (index: number) => {
+  const el = gallerySliderRef.current;
+  if (!el) return;
+
+  const slides = el.querySelectorAll("[data-gallery-slide]");
+  const target = slides[index] as HTMLElement | undefined;
+  if (!target) return;
+
+  el.scrollTo({
+    left: target.offsetLeft,
+    behavior: "smooth",
+  });
+
+  setGalleryIndex(index);
+};
+  
   // Contact form state
   const [contactNombre, setContactNombre] = useState("");
   const [contactEmail, setContactEmail] = useState("");
@@ -105,20 +123,18 @@ export default function Home() {
     }
   }, [aseVideoPlaying]);
 
-  // Auto-avance de galería cada 3 segundos
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const el = gallerySliderRef.current;
-      if (!el) return;
-      const w = el.offsetWidth + 32;
-      setGalleryIndex((prev) => {
-        const next = (prev + 1) % 5;
-        el.scrollTo({ left: next * w, behavior: "smooth" });
-        return next;
-      });
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+// Auto-avance de galería cada 4 segundos, bloque por bloque
+useEffect(() => {
+  const interval = setInterval(() => {
+    setGalleryIndex((prev) => {
+      const next = (prev + 1) % TOTAL_GALLERIES;
+      scrollToGallery(next);
+      return next;
+    });
+  }, 4000);
+
+  return () => clearInterval(interval);
+}, []);
 
   return (
     <div className="w-full min-h-screen relative bg-white overflow-hidden">
@@ -947,8 +963,23 @@ export default function Home() {
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               onScroll={(e) => {
                 const el = e.currentTarget;
-                const index = Math.round(el.scrollLeft / (el.offsetWidth + 32));
-                setGalleryIndex(Math.min(2, Math.max(0, index)));
+                const slides = Array.from(el.querySelectorAll("[data-gallery-slide]")) as HTMLElement[];
+              
+                if (!slides.length) return;
+              
+                const currentScroll = el.scrollLeft;
+                let closestIndex = 0;
+                let closestDistance = Infinity;
+              
+                slides.forEach((slide, index) => {
+                  const distance = Math.abs(slide.offsetLeft - currentScroll);
+                  if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                  }
+                });
+              
+                setGalleryIndex(closestIndex);
               }}
             >
               {[
@@ -974,11 +1005,12 @@ export default function Home() {
                   { src: "/images/galeria3/DSC06604%201%20(2).png", alt: "Galería 3 - 5", aspect: "aspect-[224/288]" },
                 ],
               ].map((items, galleryIdx) => (
-                <div
-                  key={galleryIdx}
-                  className="flex-shrink-0 w-full max-w-[900px] snap-center"
-                  style={{ scrollSnapAlign: "center" }}
-                >
+                  <div
+                    key={galleryIdx}
+                    data-gallery-slide
+                    className="flex-shrink-0 w-full max-w-[900px] snap-center"
+                    style={{ scrollSnapAlign: "center" }}
+                  >
                   <AnimatedStagger staggerChildren={0.1} delayChildren={0.15} className="relative w-full columns-2 md:columns-3 gap-4 space-y-4">
                     {items.map((item, i) => (
                       <AnimatedItem key={i} className="break-inside-avoid mb-4">
@@ -999,13 +1031,7 @@ export default function Home() {
             <div className="flex items-center justify-center gap-4 mt-4">
               <button
                 type="button"
-                onClick={() => {
-                  const el = gallerySliderRef.current;
-                  if (el) {
-                    const w = el.offsetWidth + 32;
-                    el.scrollTo({ left: Math.max(0, el.scrollLeft - w), behavior: "smooth" });
-                  }
-                }}
+                onClick={() => scrollToGallery(Math.max(0, galleryIndex - 1))}
                 disabled={galleryIndex === 0}
                 className="p-2 text-[#C58770] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#C58770]/10 rounded transition"
                 aria-label="Galería anterior"
@@ -1017,13 +1043,7 @@ export default function Home() {
                   <button
                     key={idx}
                     type="button"
-                    onClick={() => {
-                      const el = gallerySliderRef.current;
-                      if (el) {
-                        const w = el.offsetWidth + 32;
-                        el.scrollTo({ left: idx * w, behavior: "smooth" });
-                      }
-                    }}
+                    onClick={() => scrollToGallery(idx)}
                     className={`w-2.5 h-2.5 rounded-full transition ${galleryIndex === idx ? "bg-[#C58770]" : "bg-[#C58770]/40 hover:bg-[#C58770]/60"}`}
                     aria-label={`Ir a galería ${idx + 1}`}
                   />
@@ -1031,13 +1051,7 @@ export default function Home() {
               </div>
               <button
                 type="button"
-                onClick={() => {
-                  const el = gallerySliderRef.current;
-                  if (el) {
-                    const w = el.offsetWidth + 32;
-                    el.scrollTo({ left: Math.min(el.scrollWidth - el.offsetWidth, el.scrollLeft + w), behavior: "smooth" });
-                  }
-                }}
+              onClick={() => scrollToGallery(Math.min(TOTAL_GALLERIES - 1, galleryIndex + 1))}
                 disabled={galleryIndex === 2}
                 className="p-2 text-[#C58770] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#C58770]/10 rounded transition"
                 aria-label="Galería siguiente"
