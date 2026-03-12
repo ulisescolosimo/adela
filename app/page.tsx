@@ -37,12 +37,12 @@ const scrollToGallery = (index: number) => {
 };
 
   const partnerLogos = [
-  { src: "/images/logos/logo-1.png", alt: "Logo 1" },
-  { src: "/images/logos/logo-2.png", alt: "Logo 2" },
-  { src: "/images/logos/logo-3.png", alt: "Logo 3" },
-  { src: "/images/logos/logo-4.png", alt: "Logo 4" },
-  { src: "/images/logos/logo-5.png", alt: "Logo 5" },
-  { src: "/images/logos/logo-6.png", alt: "Logo 6" },
+  { src: "/images/logos/Axion.png", alt: "Axion" },
+  { src: "/images/logos/Carrefour.png", alt: "Carrefour" },
+  { src: "/images/logos/biogenesis_bago_recolor.png", alt: "Bago" },
+  { src: "/images/logos/cencosud.png", alt: "Cencosud" },
+  { src: "/images/logos/deloitte.png", alt: "Deloitte" },
+  { src: "/images/logos/elea.png", alt: "Elea" },
 ];
 
   
