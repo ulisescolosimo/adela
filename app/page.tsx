@@ -1245,7 +1245,7 @@ useEffect(() => {
       align-items: center;
       gap: 32px;
       width: max-content;
-      animation: logosMarquee 26s linear infinite;
+      animation: logosMarquee 50s linear infinite;
     }
 
     .logos-track:hover {
