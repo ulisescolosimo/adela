@@ -929,7 +929,7 @@ useEffect(() => {
 </section>
 
       {/* Mi trabajo con líderes sociales */}
-<section className="relative bg-white overflow-hidden">
+ <section className="relative bg-white overflow-hidden">
   <div className="relative max-w-[1474px] mx-auto">
     <AnimatePresence mode="wait" initial={false}>
       {!lideresExpanded ? (
