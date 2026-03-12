@@ -691,9 +691,9 @@ export default function Home() {
           >
             {/* Desktop expandido */}
             <div className="hidden md:block">
-              <div className="grid md:grid-cols-[1fr_0.95fr] gap-x-14 xl:gap-x-20 items-start">
+              <div className="grid md:grid-cols-[1fr_1fr] gap-x-16 xl:gap-x-24 items-start">
                 <div className="max-w-[560px]">
-                  <div className="text-stone-900 text-sm font-light font-poppins leading-7 space-y-10">
+                  <div className="text-stone-900 text-sm font-light font-poppins leading-7 space-y-12">
                     <p>
                       Como me moviliza mucho la desigualdad, he diseñado,
                       implementado y medido el impacto individual y comunitario
@@ -735,7 +735,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="max-w-[540px] md:-mt-[112px]">
+                <div className="max-w-[560px] md:-mt-[118px]">
                   <div className="w-32 h-32 relative mb-10 mx-auto">
                     <Image
                       src="/images/19 1.png"
@@ -746,8 +746,8 @@ export default function Home() {
                     />
                   </div>
 
-                  <div className="text-stone-900 text-sm font-light font-poppins leading-7 space-y-10">
-                    <p className="italic">
+                  <div className="text-stone-900 text-sm font-light font-poppins leading-7 space-y-12">
+                    <p>
                       &quot;En este programa aprendí a desnudar mi alma. Fue
                       difícil, pero me permitió aceptarme como soy, reconocer,
                       además de mis partes oscuras, también mi lado luminoso,
@@ -784,13 +784,13 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="mt-24 relative w-full max-w-[1080px] mx-auto aspect-[1080/520]">
+              <div className="mt-10 relative w-full max-w-[1120px] mx-auto aspect-[1120/355]">
                 <Image
                   src="/images/Adela Saenz Cavia9 1.png"
                   alt=""
                   fill
                   className="object-cover object-top"
-                  sizes="(max-width: 768px) 100vw, 1080px"
+                  sizes="(max-width: 768px) 100vw, 1120px"
                   unoptimized
                 />
               </div>
@@ -854,7 +854,7 @@ export default function Home() {
                     preciosos que se condensan en algunas de las palabras que
                     los mismos referentes nos dicen:
                   </p>
-                  <p className="italic">
+                  <p>
                     &quot;En este programa aprendí a desnudar mi alma. Fue
                     difícil, pero me permitió aceptarme como soy, reconocer,
                     además de mis partes oscuras, también mi lado luminoso,
@@ -862,7 +862,7 @@ export default function Home() {
                     aprendizaje...&quot; – referente Barrio Villa Itatí,
                     Quilmes.
                   </p>
-                  <p className="italic">
+                  <p>
                     &quot;En nuestros encuentros empecé a conocer mi
                     interioridad, a conectarme con mi debilidad y a validarla, a
                     hablar de lo que nos frustra y de qué podemos hacer para
