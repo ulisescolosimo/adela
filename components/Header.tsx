@@ -308,7 +308,7 @@ export function Header() {
         >
           <Image
             src="/images/hero/Adela Saenz Cavia25 2.png"
-            alt="Adela Sáenz"
+            alt="aAdela Sáenz"
             fill
             className="object-cover object-top"
             unoptimized
