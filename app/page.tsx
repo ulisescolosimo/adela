@@ -637,66 +637,66 @@ useEffect(() => {
   <div className="relative max-w-[1474px] mx-auto">
     <AnimatePresence mode="wait" initial={false}>
       {!lideresExpanded ? (
-        <motion.div
-          key="lideres-collapsed"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.22, ease: "easeOut" }}
+      <motion.div
+  key="lideres-collapsed"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  exit={{ opacity: 0 }}
+  transition={{ duration: 0.22, ease: "easeOut" }}
           className="px-6 py-12 md:py-16 lg:px-[92px]"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-[0.74fr_1.26fr] lg:gap-8 xl:gap-12 items-start">
-            {/* Columna izquierda */}
-            <div className="flex flex-col min-w-0 max-w-[620px]">
-              <h2 className="text-stone-900 text-4xl font-light font-poppins uppercase leading-[52px] tracking-widest mb-10 max-w-[656px]">
-                MI TRABAJO CON LÍDERES SOCIALES
-              </h2>
+>
+  <div className="grid grid-cols-1 lg:grid-cols-[0.72fr_1.28fr] lg:gap-6 xl:gap-8 items-stretch">
+    {/* Columna izquierda */}
+    <div className="flex flex-col min-w-0 max-w-[620px]">
+      <h2 className="text-stone-900 text-4xl font-light font-poppins uppercase leading-[52px] tracking-widest mb-10 max-w-[656px]">
+        MI TRABAJO CON LÍDERES SOCIALES
+      </h2>
 
-              <div className="w-32 h-32 relative flex-shrink-0 mb-8">
-                <Image
-                  src="/images/19 1.png"
-                  alt=""
-                  width={128}
-                  height={128}
-                  className="w-32 h-32 object-contain"
-                />
-              </div>
+      <div className="w-32 h-32 relative flex-shrink-0 mb-8">
+        <Image
+          src="/images/19 1.png"
+          alt=""
+          width={128}
+          height={128}
+          className="w-32 h-32 object-contain"
+        />
+      </div>
 
-              <p className="text-stone-900 text-sm font-light font-poppins leading-7 max-w-[620px] mb-8">
-                Como me moviliza mucho la desigualdad, he diseñado,
-                implementado y medido el impacto individual y comunitario de
-                programas de entrenamiento socioemocional con referentes y
-                líderes sociales de barrios populares, especialmente en la
-                ciudad de Buenos Aires y el conurbano, pero también en Córdoba y
-                Santiago del Estero. Los programas buscan acelerar la
-                transformación social contribuyendo a la formación de
-                liderazgos sociales.
-              </p>
+      <p className="text-stone-900 text-sm font-light font-poppins leading-7 max-w-[620px] mb-8">
+        Como me moviliza mucho la desigualdad, he diseñado,
+        implementado y medido el impacto individual y comunitario de
+        programas de entrenamiento socioemocional con referentes y
+        líderes sociales de barrios populares, especialmente en la
+        ciudad de Buenos Aires y el conurbano, pero también en Córdoba y
+        Santiago del Estero. Los programas buscan acelerar la
+        transformación social contribuyendo a la formación de
+        liderazgos sociales.
+      </p>
 
-              <button
-                type="button"
-                onClick={() => setLideresExpanded(true)}
-                className="inline-flex items-center justify-center w-28 h-8 bg-[#E6CC76] text-neutral-800 text-sm font-medium font-poppins leading-7 hover:bg-[#d4b96a] transition"
-              >
-                Leer más
-              </button>
-            </div>
+      <button
+        type="button"
+        onClick={() => setLideresExpanded(true)}
+        className="inline-flex items-center justify-center w-28 h-8 bg-[#E6CC76] text-neutral-800 text-sm font-medium font-poppins leading-7 hover:bg-[#d4b96a] transition"
+      >
+        Leer más
+      </button>
+    </div>
 
-            {/* Columna derecha: imagen grande */}
-            <div className="relative w-full mt-8 lg:mt-0">
-              <div className="relative w-full aspect-[900/900] max-w-[900px] lg:ml-auto">
-                <Image
-                  src="/images/Adela Saenz Cavia9 1.png"
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 900px"
-                  unoptimized
-                />
-              </div>
-            </div>
-          </div>
-        </motion.div>
+    {/* Columna derecha */}
+    <div className="relative w-full h-full mt-8 lg:mt-0">
+      <div className="relative w-full h-full min-h-[760px] lg:min-h-[860px]">
+        <Image
+          src="/images/Adela Saenz Cavia9 1.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+          sizes="(max-width: 1024px) 100vw, 900px"
+          unoptimized
+        />
+      </div>
+    </div>
+  </div>
+</motion.div>
       ) : (
         <motion.div
           key="lideres-expanded"
