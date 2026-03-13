@@ -991,7 +991,7 @@ useEffect(() => {
           </AnimatedSection>
 
           {/* Slider de galerías: cada slide es un grid completo; el scroll cambia de galería */}
-            <div className="relative w-full max-w-[760px] lg:max-w-[820px] 2xl:max-w-[900px] mx-auto py-4 lg:py-6 2xl:py-0">
+            <div className="relative w-full max-w-[760px] lg:max-w-[738px] 2xl:max-w-[900px] mx-auto py-4 lg:py-6 2xl:py-0">
             <div
               ref={gallerySliderRef}
               className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-8 pb-4 scrollbar-hide"
@@ -1043,7 +1043,7 @@ useEffect(() => {
                     <div
                       key={galleryIdx}
                       data-gallery-slide
-                      className="flex-shrink-0 w-full max-w-[760px] lg:max-w-[820px] 2xl:max-w-[900px] snap-center"
+                      className="flex-shrink-0 w-full max-w-[760px] lg:max-w-[738px] 2xl:max-w-[900px] snap-center"
                       style={{ scrollSnapAlign: "center" }}
                     >
                   <AnimatedStagger staggerChildren={0.1} delayChildren={0.15} className="relative w-full columns-2 md:columns-3 gap-4 space-y-4">
