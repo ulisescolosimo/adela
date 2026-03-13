@@ -1553,12 +1553,12 @@ useEffect(() => {
               id="mensaje"
               name="mensaje"
               placeholder=" "
-              rows={4}
+              rows={2}
               value={contactMensaje}
               onChange={(e) => setContactMensaje(e.target.value)}
               required
               disabled={contactLoading}
-              className="w-full mt-1 py-2 bg-transparent border-0 border-b border-[#C58770]/50 focus:border-[#C58770] focus:outline-none text-sm xl:text-[15px] 2xl:text-base text-black font-light font-poppins leading-6 xl:leading-7 placeholder:text-black/40 resize-y min-h-[80px] xl:min-h-[90px] 2xl:min-h-[100px] disabled:opacity-60"
+              className="w-full mt-1 py-2 bg-transparent border-0 border-b border-[#C58770]/50 focus:border-[#C58770] focus:outline-none text-sm xl:text-[15px] 2xl:text-base text-black font-light font-poppins leading-6 xl:leading-7 placeholder:text-black/40 resize-y min-h-[70px] xl:min-h-[90px] 2xl:min-h-[100px] disabled:opacity-60"
             />
           </div>
 
