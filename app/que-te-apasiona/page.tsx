@@ -262,38 +262,61 @@ export default function QueTeApasionaPage() {
 
 
         {/* MANIFIESTO CENTRAL */}
-        <section className="relative overflow-hidden bg-[#F4F3F1]">
-          <Squiggle className="pointer-events-none absolute bottom-0 left-0 h-full w-full opacity-15" stroke="#E8DDD9" />
+<section className="relative overflow-hidden bg-[#F4F3F1]">
+  {/* Formas laterales */}
+  <div className="pointer-events-none absolute left-0 top-0 hidden h-full w-[260px] md:block opacity-45">
+    <Image
+      src="/images/libro/formasizquierdas.png"
+      alt=""
+      fill
+      className="object-cover object-left-top"
+      unoptimized
+    />
+  </div>
 
-          <div className="mx-auto max-w-[900px] px-6 py-16 text-center md:px-10 lg:py-20">
-            <h2 className="text-[34px] leading-none tracking-[0.22em] font-light font-poppins uppercase text-[#595050] sm:text-[42px]">
-              LO QUE TE APASIONA
-            </h2>
+  <div className="pointer-events-none absolute right-0 top-0 hidden h-full w-[340px] md:block opacity-45">
+    <Image
+      src="/images/libro/formasderecha.png"
+      alt=""
+      fill
+      className="object-cover object-right-top"
+      unoptimized
+    />
+  </div>
 
-            <p className="mt-2 text-[14px] font-light font-poppins uppercase tracking-[0.18em] text-[#7E7474]">
-              un viaje al centro de ti mismo
-            </p>
+  <div className="relative z-10 mx-auto max-w-[980px] px-6 py-20 text-center md:px-10 lg:py-24">
+    <h2 className="text-[48px] leading-none tracking-[0.18em] font-light font-poppins uppercase text-[#7E7474] sm:text-[58px]">
+      LO QUE TE APASIONA
+    </h2>
 
-            <div className="mx-auto mt-8 max-w-[760px] space-y-5 text-[13px] leading-7 font-light font-poppins text-[#3B3434]">
-              <p>
-                Deseo que este libro te inspire y pueda contribuir a tu transformación, la que
-                necesites para ir descubriendo y poniendo en práctica lo que te apasiona.
-              </p>
-              <p>
-                La mayoría de las historias que comparto en el libro son personales o de gente
-                cercana a las que conozco, quiero, admiro y cuyas vidas me resultan, de una
-                forma u otra, inspiradoras. Sus historias son inspiradoras, pero detrás de ellas
-                hay personas comunes, como cada uno de nosotros.
-              </p>
-              <p>
-                Elegí hacerlo de esta manera porque, muchas veces, las narrativas de éxito de
-                personas muy destacadas pueden tener una influencia avasallante y hacernos creer
-                que eso le pasa solo a gente “especial”. Y a mí me gustaría que sientas, al ir
-                leyendo, que son cosas que nos pasan a todos. Este es el motivo de la elección.
-              </p>
-            </div>
-          </div>
-        </section>
+    <p className="mt-4 text-[28px] leading-none font-swanky text-[#4A403F]">
+      un viaje al centro de ti mismo
+    </p>
+
+    <div className="mx-auto mt-12 max-w-[760px] space-y-8 text-[13px] leading-[2.15] font-light font-poppins text-[#3B3434]">
+      <p>
+        Deseo que este libro te inspire y pueda contribuir a tu transformación, la
+        que necesites para ir descubriendo y poniendo en práctica lo que te
+        apasiona.
+      </p>
+
+      <p>
+        La mayoría de las historias que comparto en el libro son personales o de
+        gente cercana a las que conozco, quiero, admiro y cuyas vidas me resultan,
+        de una forma u otra, inspiradoras. Sus historias son inspiradoras, pero
+        detrás de ellas hay personas comunes, como cada uno de nosotros.
+      </p>
+
+      <p>
+        Elegí hacerlo de esta manera porque, muchas veces, las narrativas de éxito
+        de personas muy destacadas pueden tener una influencia avasallante y
+        hacernos creer que eso le pasa solo a gente “especial”. Y a mí me gustaría
+        que sientas, al ir leyendo, que son cosas que nos pasan a todos. Este es el
+        motivo de la elección.
+      </p>
+    </div>
+  </div>
+</section>
 
         {/* TEMAS DEL LIBRO */}
         <section className="relative overflow-hidden bg-[#FBFBF8]">
