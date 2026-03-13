@@ -660,7 +660,6 @@ useEffect(() => {
 <section className="relative bg-white overflow-hidden">
   <div className="relative max-w-[1474px] mx-auto">
     <AnimatePresence mode="wait">
-      {!lideresExpanded ? (
 {!lideresExpanded ? (
   <motion.div
     key="lideres-collapsed"
