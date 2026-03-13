@@ -273,7 +273,7 @@ export function Hero() {
       </div>
 
       {/* Desktop: layout original con posiciones fijas */}
-     <div className="relative hidden lg:block w-full max-w-[1474px] min-h-[746px] h-[746px] mx-auto bg-[#F9F1EF] overflow-hidden">
+     <div className="relative hidden lg:block w-full max-w-[1474px] mx-auto bg-[#F9F1EF] h-[620px] xl:h-[680px] 2xl:h-[746px] overflow-hidden">
 <motion.div
   initial={{ opacity: 0, y: 30 }}
   animate={{ opacity: 1, y: 0 }}
