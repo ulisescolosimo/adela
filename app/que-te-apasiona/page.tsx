@@ -285,7 +285,7 @@ export default function QueTeApasionaPage() {
   </div>
 
   <div className="relative z-10 mx-auto max-w-[980px] px-6 py-20 text-center md:px-10 lg:py-24">
-    <h2 className="text-[48px] leading-none tracking-[0.18em] font-light font-poppins uppercase text-[#7E7474] sm:text-[58px]">
+    <h2 className="text-[48px] leading-none tracking-[0.18em] font-light font-poppins uppercase text-[#7E7474] sm:text-[41px]">
       LO QUE TE APASIONA
     </h2>
 
@@ -293,7 +293,7 @@ export default function QueTeApasionaPage() {
       un viaje al centro de ti mismo
     </p>
 
-    <div className="mx-auto mt-12 max-w-[760px] space-y-8 text-[13px] leading-[2.15] font-light font-poppins text-[#3B3434]">
+    <div className="mx-auto mt-12 max-w-[550px] space-y-8 text-[13px] leading-[2.15] font-light font-poppins text-[#3B3434]">
       <p>
         Deseo que este libro te inspire y pueda contribuir a tu transformación, la
         que necesites para ir descubriendo y poniendo en práctica lo que te
