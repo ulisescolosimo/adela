@@ -661,67 +661,68 @@ useEffect(() => {
   <div className="relative max-w-[1474px] mx-auto">
     <AnimatePresence mode="wait">
       {!lideresExpanded ? (
-        <motion.div
-          key="lideres-collapsed"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-          className="px-6 py-10 md:py-12 lg:pl-[92px] lg:pr-0"
+{!lideresExpanded ? (
+  <motion.div
+    key="lideres-collapsed"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.35, ease: "easeOut" }}
+    className="px-6 py-8 md:py-10 lg:pl-[72px] lg:pr-0 2xl:pl-[92px]"
+  >
+    <div className="grid grid-cols-1 lg:grid-cols-[460px_minmax(0,1fr)] lg:gap-6 xl:gap-8 2xl:grid-cols-[540px_minmax(0,1fr)] 2xl:gap-10 items-stretch">
+      {/* Columna izquierda */}
+      <div className="flex flex-col min-w-0 max-w-[460px] pt-0 2xl:max-w-[540px] 2xl:pt-2">
+        <h2 className="text-stone-900 text-[30px] 2xl:text-4xl font-light font-poppins uppercase leading-[40px] 2xl:leading-[52px] tracking-[0.18em] max-w-[390px] 2xl:max-w-[460px] mb-6 2xl:mb-8">
+          MI TRABAJO CON LÍDERES SOCIALES
+        </h2>
+
+        <div className="w-20 h-20 relative flex-shrink-0 mb-6 2xl:w-24 2xl:h-24 2xl:mb-8">
+          <Image
+            src="/images/19 1.png"
+            alt=""
+            width={96}
+            height={96}
+            className="w-full h-full object-contain"
+          />
+        </div>
+
+        <p className="text-stone-900 text-[13px] 2xl:text-sm font-light font-poppins leading-[1.9] max-w-[430px] 2xl:max-w-[500px] mb-6 2xl:mb-8">
+          Como me moviliza mucho la desigualdad, he diseñado,
+          implementado y medido el impacto individual y comunitario de
+          programas de entrenamiento socioemocional con referentes y
+          líderes sociales de barrios populares, especialmente en la
+          ciudad de Buenos Aires y el conurbano, pero también en Córdoba y
+          Santiago del Estero. Los programas buscan acelerar la
+          transformación social contribuyendo a la formación de
+          liderazgos sociales.
+        </p>
+
+        <button
+          type="button"
+          onClick={() => setLideresExpanded(true)}
+          className="inline-flex items-center justify-center w-28 h-8 bg-[#E6CC76] text-neutral-800 text-sm font-medium font-poppins leading-7 hover:bg-[#d4b96a] transition"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[540px_minmax(0,1fr)] lg:gap-8 xl:gap-10 items-stretch">
-            {/* Columna izquierda */}
-            <div className="flex flex-col min-w-0 max-w-[540px] pt-2">
-              <h2 className="text-stone-900 text-4xl font-light font-poppins uppercase leading-[52px] tracking-widest max-w-[460px] mb-8">
-                MI TRABAJO CON LÍDERES SOCIALES
-              </h2>
+          Leer más
+        </button>
+      </div>
 
-              <div className="w-24 h-24 relative flex-shrink-0 mb-8">
-                <Image
-                  src="/images/19 1.png"
-                  alt=""
-                  width={96}
-                  height={96}
-                  className="w-24 h-24 object-contain"
-                />
-              </div>
-
-              <p className="text-stone-900 text-sm font-light font-poppins leading-7 max-w-[500px] mb-8">
-                Como me moviliza mucho la desigualdad, he diseñado,
-                implementado y medido el impacto individual y comunitario de
-                programas de entrenamiento socioemocional con referentes y
-                líderes sociales de barrios populares, especialmente en la
-                ciudad de Buenos Aires y el conurbano, pero también en Córdoba y
-                Santiago del Estero. Los programas buscan acelerar la
-                transformación social contribuyendo a la formación de
-                liderazgos sociales.
-              </p>
-
-              <button
-                type="button"
-                onClick={() => setLideresExpanded(true)}
-                className="inline-flex items-center justify-center w-28 h-8 bg-[#E6CC76] text-neutral-800 text-sm font-medium font-poppins leading-7 hover:bg-[#d4b96a] transition"
-              >
-                Leer más
-              </button>
-            </div>
-
-            {/* Columna derecha */}
-            <div className="relative w-full mt-8 lg:mt-0">
-              <div className="relative w-full h-full min-h-[620px] lg:min-h-[760px] overflow-hidden">
-                <Image
-                  src="/images/Adela Saenz Cavia9 1.png"
-                  alt=""
-                  fill
-                  className="object-cover object-[center_18%]"
-                  sizes="(max-width: 1024px) 100vw, 980px"
-                  unoptimized
-                />
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      ) : (
+      {/* Columna derecha */}
+      <div className="relative w-full mt-8 lg:mt-0">
+        <div className="relative w-full h-full min-h-[520px] lg:min-h-[560px] xl:min-h-[620px] 2xl:min-h-[760px] overflow-hidden">
+          <Image
+            src="/images/Adela Saenz Cavia9 1.png"
+            alt=""
+            fill
+            className="object-cover object-[center_18%]"
+            sizes="(max-width: 1024px) 100vw, 980px"
+            unoptimized
+          />
+        </div>
+      </div>
+    </div>
+  </motion.div>
+) : (
         <motion.div
           key="lideres-expanded"
           initial={{ opacity: 0 }}
