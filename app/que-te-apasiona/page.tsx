@@ -169,15 +169,17 @@ export default function QueTeApasionaPage() {
           <br />
           que hacen: algunos llaman a esto “sentido de
           <br />
-          vida”, otros “propósito” y otros “pasión”.
+        <span className="inline-block w-full text-center">
+    vida”, otros “propósito” y otros “pasión”.
+        </span>
         </p>
 
-        <div className="absolute -right-[60px] top-[55%] hidden lg:block">
+        <div className="absolute -right-[68px] top-[53%] hidden lg:block">
           <Image
             src="/images/libro/flecha1.png"
             alt=""
-            width={48}
-            height={48}
+            width={58}
+            height={58}
             className="object-contain"
             unoptimized
           />
