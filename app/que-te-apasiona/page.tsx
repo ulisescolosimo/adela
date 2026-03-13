@@ -31,30 +31,6 @@ function Squiggle({
   );
 }
 
-const temas = [
-  {
-    title: "Primera parte.",
-    subtitle: "Sobre la aventura de descubrir y hacer lo que te apasiona",
-  },
-  {
-    title: "Segunda parte.",
-    subtitle: "El método 3. El inicio del camino. Hacia el descubrimiento de lo que te apasiona",
-  },
-  {
-    title: "Tercera parte.",
-    subtitle: "Conectar con la pasión",
-  },
-  {
-    title: "Cuarta parte.",
-    subtitle:
-      "Formas de encontrar la pasión · (Re)encontrarnos con nuestra pasión · ¿Seguir tu pasión o buscar tu pasión? · Mentores y guías · El impacto de tu pasión en los demás y en tu comunidad",
-  },
-  {
-    title: "Quinta parte.",
-    subtitle:
-      "¿Qué te apasiona? · Cómo usar este libro · Preparándonos para transitar el camino: AGR · Breve historia de la pasión · Reconectar con nuestra identidad profunda · Las emociones que alientan y obstruyen el camino",
-  },
-];
 
 export default function QueTeApasionaPage() {
   const [openVisualizacion, setOpenVisualizacion] = useState(false);
@@ -318,37 +294,104 @@ export default function QueTeApasionaPage() {
   </div>
 </section>
 
-        {/* TEMAS DEL LIBRO */}
-        <section className="relative overflow-hidden bg-[#FBFBF8]">
-          <div className="mx-auto max-w-[1474px] px-6 py-14 md:px-10 lg:px-[72px] lg:py-16">
-            <div className="mb-10 text-center">
-              <p className="text-[14px] leading-7 font-light font-poppins text-[#817676]">
-                El libro plantea una aventura para ir al encuentro de lo que te apasiona y
-                recorre estos temas:
-              </p>
-            </div>
+       {/* TEMAS DEL LIBRO */}
+<section className="relative overflow-hidden bg-[#FBFBF8]">
+  {/* Forma de fondo inferior */}
+  <div className="pointer-events-none absolute bottom-0 left-0 h-[260px] w-[78%] opacity-35 md:h-[320px]">
+    <Image
+      src="/images/libro/forma1.png"
+      alt=""
+      fill
+      className="object-contain object-left-bottom"
+      unoptimized
+    />
+  </div>
 
-            <div className="mx-auto max-w-[1020px] divide-y divide-[#E9E2DD] border-t border-[#E9E2DD]">
-              {temas.map((tema) => (
-                <div
-                  key={tema.title + tema.subtitle}
-                  className="grid grid-cols-1 gap-4 py-5 md:grid-cols-[260px_minmax(0,1fr)] md:gap-10"
-                >
-                  <div>
-                    <p className="text-[13px] leading-6 font-poppins text-[#D1BA64]">
-                      {tema.title}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[13px] leading-7 font-light font-poppins text-[#3B3434]">
-                      {tema.subtitle}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+  <div className="relative z-10 mx-auto max-w-[980px] px-6 py-16 md:px-10 lg:py-20">
+    {/* Título manuscrito */}
+    <div className="mb-14 text-center">
+      <p className="mx-auto max-w-[560px] text-[27px] leading-[1.35] font-swanky text-[#8E99A8]">
+        El libro plantea una aventura para ir al
+        <br />
+        encuentro de lo que te apasiona y
+        <br />
+        recorre estos temas:
+      </p>
+    </div>
+
+    {/* Tabla de temas */}
+    <div className="mx-auto max-w-[820px] border-t border-[#C8CED3]">
+      {/* Fila 1 */}
+      <div className="grid grid-cols-1 gap-5 py-6 md:grid-cols-[190px_minmax(0,1fr)] md:gap-7 border-b border-[#C8CED3]">
+        <div>
+          <p className="text-[12px] leading-[1.15] font-poppins uppercase tracking-[0.04em] text-[#D2BE61]">
+            Sobre la aventura de descubrir y hacer lo que te apasiona
+          </p>
+        </div>
+        <div className="space-y-1 text-[12px] leading-[1.9] font-light font-poppins text-[#3B3434]">
+          <p>– Cómo usar este libro</p>
+          <p>Preparándonos para transitar el camino: Amigarte, Gratitud, Reconocimiento (AGR)</p>
+          <p>Breve historia de la pasión</p>
+        </div>
+      </div>
+
+      {/* Fila 2 */}
+      <div className="grid grid-cols-1 gap-5 py-6 md:grid-cols-[190px_minmax(0,1fr)] md:gap-7 border-b border-[#C8CED3]">
+        <div>
+          <p className="text-[12px] leading-[1.15] font-poppins uppercase tracking-[0.04em] text-[#D9A8A0]">
+            Primera parte.
+            <br />
+            El método 3. El
+            <br />
+            camino. Hacia el
+            <br />
+            descubrimiento de lo que
+            <br />
+            te apasiona
+          </p>
+        </div>
+        <div className="space-y-1 text-[12px] leading-[1.9] font-light font-poppins text-[#3B3434]">
+          <p>Reconectar con nuestra identidad profunda</p>
+          <p>Las emociones que alientan y obstruyen el camino hacia el</p>
+          <p>descubrimiento y realización de lo que nos apasiona</p>
+        </div>
+      </div>
+
+      {/* Fila 3 */}
+      <div className="grid grid-cols-1 gap-5 py-6 md:grid-cols-[190px_minmax(0,1fr)] md:gap-7">
+        <div>
+          <p className="text-[12px] leading-[1.15] font-poppins uppercase tracking-[0.04em] text-[#9AA6B5]">
+            Segunda parte.
+            <br />
+            Conectar con la pasión
+          </p>
+        </div>
+        <div className="space-y-1 text-[12px] leading-[1.9] font-light font-poppins text-[#3B3434]">
+          <p>Formas de encontrar la pasión</p>
+          <p>(Re)encontrarnos con nuestra pasión</p>
+          <p>¿Seguir tu pasión o buscar tu pasión?</p>
+          <p>Mentores y guías</p>
+          <p>El impacto de tu pasión en los demás y en tu comunidad</p>
+          <p>¿Qué te apasiona?</p>
+        </div>
+      </div>
+    </div>
+
+    {/* Ejercicios del libro */}
+    <div className="mt-20 text-center">
+      <h3 className="text-[26px] leading-none font-swanky text-[#8E99A8]">
+        Ejercicios del libro
+      </h3>
+
+      <p className="mx-auto mt-8 max-w-[560px] text-[13px] leading-[2.05] font-light font-poppins text-[#3B3434]">
+        Si lo estás leyendo verás que en algunos momentos hay referencia a
+        ejercicios y actividades que remiten a mi página web. Acá encontrarás
+        esos ejercicios, que los dejo abiertos a todos para que puedan
+        “asomarse” al libro y si les divierte y atrapa, leerlo completo.
+      </p>
+    </div>
+  </div>
+</section>
 
         {/* ACTIVIDAD 1 */}
         <section className="relative overflow-hidden bg-[#F6F3EA]">
