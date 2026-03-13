@@ -76,28 +76,6 @@ function Squiggle({
   );
 }
 
-function SmallArrow({
-  className,
-}: {
-  className?: string;
-}) {
-  return (
-    <svg className={className} viewBox="0 0 60 32" fill="none" aria-hidden>
-      <path
-        d="M2 26C24 5 42 7 58 14"
-        stroke="#DCA08E"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M52 8C55 10 57 12 58 14C56 15 53 16 48 16"
-        stroke="#DCA08E"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
 
 const temas = [
   {
@@ -169,58 +147,71 @@ export default function QueTeApasionaPage() {
         </div>
       </header>
 
-      {/* HERO */}
-      <section
-        id="hero-libro"
-        className="relative overflow-hidden bg-[#F3E5E2] pt-10 sm:pt-12 lg:pt-16"
-      >
-        <SmallArrow className="absolute left-[8%] top-[24%] hidden w-24 lg:block opacity-70" />
-        <SmallArrow className="absolute right-[20%] top-[32%] hidden w-24 rotate-180 lg:block opacity-70" />
+   {/* HERO */}
+<section
+  id="hero-libro"
+  className="relative min-h-screen overflow-hidden bg-[#F3E5E2]"
+>
+  <div className="mx-auto grid min-h-screen max-w-[1474px] grid-cols-1 items-center gap-10 px-6 py-10 md:px-10 lg:grid-cols-[0.95fr_1.05fr] lg:px-[72px] lg:py-12">
+    {/* Columna izquierda */}
+    <div className="relative z-10 max-w-[520px] lg:ml-[40px] xl:ml-[80px]">
+      <h1 className="text-[#231F20] font-poppins font-light uppercase tracking-[0.16em] leading-[0.95] text-[54px] sm:text-[64px] lg:text-[76px] xl:text-[88px]">
+        ¿QUÉ TE
+        <br />
+        APASIONA?
+      </h1>
 
-        <div className="mx-auto grid max-w-[1474px] grid-cols-1 items-center gap-12 px-6 py-12 md:px-10 lg:grid-cols-[1.1fr_0.9fr] lg:px-[72px] lg:py-16">
-          <div className="max-w-[560px]">
-            <p className="mb-3 text-[13px] font-swanky text-[#DCA08E]">
-              ¿Qué te apasiona?
-            </p>
+      <div className="relative mt-10 max-w-[520px]">
+        <p className="text-[#D49A89] font-swanky text-[22px] leading-[1.45] sm:text-[24px] lg:text-[26px]">
+          Siempre me ha interesado entender el motor
+          <br />
+          que mueve a las personas a hacer las cosas
+          <br />
+          que hacen: algunos llaman a esto “sentido de
+          <br />
+          vida”, otros “propósito” y otros “pasión”.
+        </p>
 
-            <h1 className="mb-6 text-[42px] leading-[1.02] tracking-[0.18em] font-light font-poppins uppercase text-[#231F20] sm:text-[54px] md:text-[64px]">
-              ¿QUÉ TE
-              <br />
-              APASIONA?
-            </h1>
-
-            <p className="max-w-[520px] text-[14px] leading-7 font-light font-poppins text-[#3B3434]">
-              Siempre me ha interesado entender el motor que mueve a las personas a hacer
-              las cosas que hacen: algunos llaman a esto sentido de vida, otros propósito y
-              otros pasión.
-            </p>
-          </div>
-
-          <div className="relative flex items-center justify-center lg:justify-end">
-            <div className="relative w-full max-w-[560px]">
-              <div className="relative mx-auto aspect-[730/420] w-full max-w-[560px]">
-                <Image
-                  src="/images/libro/libro-hero.png"
-                  alt="Libro ¿Qué te apasiona?"
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 1024px) 100vw, 560px"
-                  unoptimized
-                />
-              </div>
-
-              <a
-                href="https://www.galernaweb.com/productos/que-te-apasiona/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute right-0 top-1/2 inline-flex -translate-y-1/2 translate-x-2 items-center justify-center rounded-full bg-[#C88C73] px-7 py-3 text-[12px] uppercase tracking-[0.14em] text-white font-poppins shadow-md transition hover:opacity-90"
-              >
-                Comprar
-              </a>
-            </div>
-          </div>
+        <div className="absolute -right-[60px] top-[55%] hidden lg:block">
+          <Image
+            src="/images/libro/flecha1.png"
+            alt=""
+            width={48}
+            height={48}
+            className="object-contain"
+            unoptimized
+          />
         </div>
-      </section>
+      </div>
+    </div>
+
+    {/* Columna derecha */}
+    <div className="relative flex items-center justify-center lg:justify-start">
+      <div className="relative w-full max-w-[560px] xl:max-w-[620px]">
+        <div className="relative aspect-[700/620] w-full">
+          <Image
+            src="/images/libro/libro-hero.png"
+            alt="Libro ¿Qué te apasiona?"
+            fill
+            className="object-contain"
+            sizes="(max-width: 1024px) 100vw, 620px"
+            unoptimized
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Botón flotante abajo a la derecha */}
+  <a
+    href="https://www.galernaweb.com/productos/que-te-apasiona/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="absolute bottom-8 right-8 z-20 flex h-[110px] w-[110px] items-center justify-center rounded-full bg-[#C88C73] text-white text-[15px] uppercase tracking-[0.08em] font-poppins shadow-[0_10px_25px_rgba(0,0,0,0.14)] transition hover:opacity-90 md:bottom-10 md:right-10"
+  >
+    Comprar
+  </a>
+</section>
 
       {/* INTRO 2 COLUMNAS */}
       <section className="relative overflow-hidden bg-[#FBFBF8]">
